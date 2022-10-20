@@ -1,0 +1,24 @@
+type Resident {
+  id: String!
+  name: String!
+}
+
+input CreateResidentInput {
+  name: String!
+}
+
+input UpdateResidentInput {
+  id: String!
+  name: String!
+}
+
+type Query {
+  residents: [Resident]!
+  resident(id: String!): Resident
+}
+
+type Mutation {
+  createResident(createResidentInput: CreateResidentInput!): Resident!
+  updateResident(updateResidentInput: UpdateResidentInput!): Resident!
+  removeResident(id: String!): Resident
+}
