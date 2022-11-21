@@ -1,0 +1,50 @@
+type Servicerequest {
+  id: String!
+  name: String!
+  desc: String!
+  state: Int!
+  expectedFinish: String!
+  commnet: String!
+  price: Float!
+  createdAt: String!
+  managerId: String!
+  technicianId: String!
+}
+
+input CreateServicerequestInput {
+  name: String!
+  desc: String!
+  state: Int!
+  expectedFinish: String!
+  commnet: String!
+  price: Float!
+  managerId: String!
+  technicianId: String!
+}
+
+input UpdateServicerequestInput {
+  id: String!
+  name: String!
+  desc: String!
+  state: Int!
+  expectedFinish: String!
+  commnet: String!
+  price: Float!
+  managerId: String!
+  technicianId: String!
+}
+
+type Query {
+  servicerequest: [Servicerequest]!
+  servicerequests(id: String!): Servicerequest
+}
+
+type Mutation {
+  createServicerequest(
+    createServicerequestInput: CreateServicerequestInput!
+  ): Servicerequest!
+  updateServicerequest(
+    updateServicerequestInput: UpdateServicerequestInput!
+  ): Servicerequest!
+  removeServicerequest(id: String!): Servicerequest
+}

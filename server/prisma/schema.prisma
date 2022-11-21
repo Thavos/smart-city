@@ -1,17 +1,108 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-datasource db {
-  provider = "cockroachdb"
-  url      = env("DATABASE_URL")
-}
+// ------------------ CONECTION ------------------
 
 generator client {
   provider = "prisma-client-js"
 }
 
-//---------------------Users-------------------------//
-model Resident {
-  id   String @id @default(cuid())
-  name String
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
 }
+
+// ------------------ DATABSE ------------------
+// User - every one that uses website has this
+//      - authId determines the user's permissions
+//        0 - User |  1 - Technician | 2 - Manager | 3 - Admin
+//
+// Technician
+// Manager
+// Admin?
+//
+
+model User {
+  id         String      @id @unique @default(cuid())
+  name       String
+  surn       String
+  email      String      @unique
+  pwd        String
+  authId     Int // 0 - User |  1 - Technician | 2 - Manager | 3 - Admin
+  Technician Technician?
+  Manager    Manager?
+  // Admin      Admin?
+  comments   Comment[]
+  tickets    Ticket[]
+}
+
+model Technician {
+  id             String           @id @unique @default(cuid())
+  user           User             @relation(fields: [userId], references: [id])
+  userId         String           @unique
+  ServiceRequest ServiceRequest[]
+}
+
+model Manager {
+  id             String           @id @unique @default(cuid())
+  user           User             @relation(fields: [userId], references: [id])
+  userId         String           @unique
+  ServiceRequest ServiceRequest[]
+}
+
+model Ticket {
+  id    String  @id @unique @default(cuid())
+  name  String
+  desc  String?
+  state Int // 0 - open | 1 - in progress | 2 - closed | 3 - denied
+
+  createdAt DateTime @default(now()) @db.Date
+
+  comments Comment[]
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  // TODO : how do we add images
+}
+
+model Comment {
+  id   String @id @unique @default(cuid())
+  desc String
+
+  createAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  ticket   Ticket @relation(fields: [ticketId], references: [id])
+  ticketId String
+}
+
+model ServiceRequest {
+  id   String @id @unique @default(cuid())
+  name String
+  desc String
+
+  state Int // 0 - open | 1 - in progress | 2 - closed | 3 - problem
+
+  expectedFinish DateTime
+  comment        String
+  price          Float
+
+  createAt DateTime @default(now())
+
+  technician   Technician @relation(fields: [technicianId], references: [id])
+  technicianId String
+
+  manager   Manager @relation(fields: [managerId], references: [id])
+  managerId String
+}
+
+// TODO : is there a reason to have this ? or we just go with auth id
+//        cuz theres nothing to attach on admin model tbh
+// model Admin {
+//  id     String @id @default(cuid())
+//  userId String @unique
+//  user   User   @relation(fields: [userId], references: [id])
+// }

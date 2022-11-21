@@ -1,12 +1,17 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { GraphQLModule } from '@nestjs/graphql';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PrismaService } from './prisma/prisma.service';
-import { ResidentModule } from './resident/resident.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+
+import { UserModule } from './database/user/user.module';
+import { TechnicianModule } from './database/technician/technician.module';
+import { ManagerModule } from './database/manager/manager.module';
+import { TicketModule } from './database/ticket/ticket.module';
+import { CommentModule } from './database/comment/comment.module';
+import { ServicerequestModule } from './database/servicerequest/servicerequest.module';
 
 @Module({
   imports: [
@@ -16,6 +21,8 @@ import { ResidentModule } from './resident/resident.module';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      context: ({ req }) => ({ req }),
+      cors: { origin: true, credentials: true },
       playground: true,
       typePaths: ['./**/*.graphql'],
       definitions: {
@@ -23,9 +30,14 @@ import { ResidentModule } from './resident/resident.module';
         outputAs: 'class',
       },
     }),
-    ResidentModule,
+    UserModule,
+    TechnicianModule,
+    ManagerModule,
+    TicketModule,
+    CommentModule,
+    ServicerequestModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [AppService],
 })
 export class AppModule {}

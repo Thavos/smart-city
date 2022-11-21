@@ -1,0 +1,34 @@
+type Ticket {
+  id: String!
+  name: String!
+  desc: String!
+  state: Int!
+  createdAt: String!
+  userId: String!
+}
+
+input CreateTicketInput {
+  name: String!
+  desc: String!
+  state: Int!
+  userId: String!
+}
+
+input UpdateTicketInput {
+  id: String!
+  name: String!
+  desc: String!
+  state: Int!
+  userId: String!
+}
+
+type Query {
+  ticket: [Ticket]!
+  tickets(id: String!): Ticket
+}
+
+type Mutation {
+  createTicket(createTicketInput: CreateTicketInput): Ticket
+  updateTicket(updateTicketInput: UpdateTicketInput): Ticket
+  removeTicket(id: String): Ticket
+}

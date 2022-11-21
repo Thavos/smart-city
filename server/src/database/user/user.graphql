@@ -1,0 +1,46 @@
+type User {
+  id: String!
+  name: String!
+  surn: String!
+  email: String!
+  pwd: String!
+  authId: Int!
+  Technician: Technician!
+  Manager: Manager!
+  comments: [Comment!]!
+  tickets: [Ticket!]!
+}
+
+input CreateUserInput {
+  name: String!
+  surn: String!
+  email: String!
+  pwd: String!
+}
+
+input UpdateUserInput {
+  id: String!
+  name: String!
+  surn: String!
+  email: String!
+  pwd: String!
+  authId: Int!
+}
+
+input LoginUserInput {
+  email: String!
+  pwd: String!
+}
+
+type Query {
+  user: [User]!
+  users(id: String!): User
+  profile: User
+  login(loginUserInput: LoginUserInput): User!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput): User
+  updateUser(updateUserInput: UpdateUserInput): User
+  removeUser(id: String): User
+}

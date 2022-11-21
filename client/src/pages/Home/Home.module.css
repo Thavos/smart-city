@@ -1,0 +1,36 @@
+.container {
+  margin: auto;
+  margin-top: 10rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.btn {
+  background-color: #08d;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+
+  margin-bottom: 1rem;
+  min-width: 5rem;
+}
+
+.border-only {
+  background-color: #00000000 !important;
+
+  width: 4.6rem !important;
+  min-width: 0rem !important;
+
+  border: 0.2rem solid;
+  border-color: #08d;
+}
