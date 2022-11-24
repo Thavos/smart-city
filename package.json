@@ -1,4 +1,10 @@
 {
+  "name": "smart-city",
+  "version": "0.0.1",
+  "description": "",
+  "author": "xhruzs00",
+  "private": true,
+  "license": "UNLICENSED",
   "main": "server/dist/main.js",
   "scripts": {
       "postinstall": "cd client && yarn install && yarn build && cd ../server && yarn install && yarn build"
