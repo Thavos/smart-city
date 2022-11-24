@@ -4,7 +4,8 @@ import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-  app.setGlobalPrefix('api');
+
+  if (process.env.GLOBALPREFIX) app.setGlobalPrefix(process.env.GLOBALPREFIX);
 
   app.use(cookieParser());
 
