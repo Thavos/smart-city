@@ -14,7 +14,7 @@ export const Ticktes: FC = () => {
   const [tickets, setTickets] = useState<[TicketType]>();
 
   useEffect(() => {
-    fetch("/graphql", {
+    fetch("/api/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
