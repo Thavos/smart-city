@@ -42,14 +42,14 @@ export class CreateServicerequestInput {
 
 export class UpdateServicerequestInput {
     id: string;
-    name: string;
-    desc: string;
-    state: number;
-    expectedFinish: string;
-    commnet: string;
-    price: number;
-    managerId: string;
-    technicianId: string;
+    name?: Nullable<string>;
+    desc?: Nullable<string>;
+    state?: Nullable<number>;
+    expectedFinish?: Nullable<string>;
+    commnet?: Nullable<string>;
+    price?: Nullable<number>;
+    managerId?: Nullable<string>;
+    technicianId?: Nullable<string>;
 }
 
 export class CreateTechnicianInput {
@@ -148,11 +148,11 @@ export abstract class IMutation {
 
     abstract removeManager(id: string): Nullable<Manager> | Promise<Nullable<Manager>>;
 
-    abstract createServicerequest(createServicerequestInput: CreateServicerequestInput): Servicerequest | Promise<Servicerequest>;
+    abstract createServicerequest(createServicerequestInput?: Nullable<CreateServicerequestInput>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
 
-    abstract updateServicerequest(updateServicerequestInput: UpdateServicerequestInput): Servicerequest | Promise<Servicerequest>;
+    abstract updateServicerequest(updateServicerequestInput?: Nullable<UpdateServicerequestInput>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
 
-    abstract removeServicerequest(id: string): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
+    abstract removeServicerequest(id?: Nullable<string>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
 
     abstract createTechnician(createTechnicianInput: CreateTechnicianInput): Technician | Promise<Technician>;
 

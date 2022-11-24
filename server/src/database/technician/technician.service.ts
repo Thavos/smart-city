@@ -3,26 +3,39 @@ import {
   CreateTechnicianInput,
   UpdateTechnicianInput,
 } from 'src/types/graphql';
+import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class TechnicianService {
+  constructor(private readonly prisma: PrismaService) {}
+
   create(createTechnicianInput: CreateTechnicianInput) {
-    return 'This action adds a new technician';
+    return this.prisma.technician.create({
+      data: createTechnicianInput,
+    });
   }
 
   findAll() {
-    return `This action returns all technician`;
+    return this.prisma.manager.findMany();
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} technician`;
+    return this.prisma.technician.findUnique({
+      where: { id: id },
+      select: { id: true },
+    });
   }
 
   update(id: string, updateTechnicianInput: UpdateTechnicianInput) {
-    return `This action updates a #${id} technician`;
+    return this.prisma.technician.update({
+      where: { id: id },
+      data: updateTechnicianInput,
+    });
   }
 
   remove(id: string) {
-    return `This action removes a #${id} technician`;
+    return this.prisma.technician.delete({
+      where: { id: id },
+    });
   }
 }
