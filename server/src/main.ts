@@ -10,6 +10,8 @@ async function bootstrap() {
 
   app.enableCors();
 
-  await app.listen(process.env.PORT || 3000);
+  let port = process.env.PORT || 3000;
+  await app.listen(port);
+  console.log('App listening: ', port);
 }
 bootstrap();
