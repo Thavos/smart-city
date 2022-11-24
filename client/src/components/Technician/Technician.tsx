@@ -1,12 +1,12 @@
 import { FC } from "react";
-import { User } from "../User";
+import { Ticktes } from "../Ticktes";
 import styles from "./Technician.module.css";
 
 export const Technician: FC = () => {
   return (
     <>
       <p>Technician menu</p>
-      <User />
+      <Ticktes />
       <p>My service tickets</p>
     </>
   );

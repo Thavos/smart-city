@@ -1,20 +1,22 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./Profile.module.css";
-import { useNavigate } from "react-router-dom";
 
-import { Admin } from "../../components/Admin";
-import { Manager } from "../../components/Manager";
+import { MenuBar } from "../../components/MenuBar";
+
+import { Citizen } from "../../components/Citizen";
 import { Technician } from "../../components/Technician";
-import { User } from "../../components/User/User";
+import { Manager } from "../../components/Manager";
+import { Admin } from "../../components/Admin";
+import { Ticktes } from "../../components/Ticktes";
 
 enum auhtority {
-  "Registered" = 0,
+  "Citizen" = 0,
   "Technician" = 1,
   "Manager" = 2,
   "Admin" = 3,
 }
 
-const ProfileType = [User, Technician, Manager, Admin];
+const ProfileType = [Citizen, Technician, Manager, Admin];
 
 type UserType = {
   name: string;
@@ -23,26 +25,16 @@ type UserType = {
 };
 
 export const Profile: FC = () => {
-  const [user, setUser] = useState<UserType>();
+  const [user, setUser] = useState<UserType>({
+    name: "Jozko",
+    surn: "Ferko",
+    authId: 0,
+  });
   let C: any;
-
-  const navigate = useNavigate();
 
   const setC = () => {
     if (user) C = ProfileType[user.authId];
     return <C />;
-  };
-
-  const logout = async () => {
-    console.log("here");
-
-    await fetch("/api/logout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }).then(() => navigate("/"));
   };
 
   useEffect(() => {
@@ -70,22 +62,13 @@ export const Profile: FC = () => {
 
   return (
     <>
-      <button
-        onClick={logout}
-        className={styles["btn"]}
-        style={{ backgroundColor: "#d63624" }}
-      >
-        Logout
-      </button>
       {user && (
         <>
-          <div>
-            <p>{user?.name || "Name"}</p>
-            <p>{user?.surn || "Surname"}</p>
-            <p>{auhtority[user.authId]}</p>
-          </div>
+          <MenuBar name={user.name} surn={user.surn} />
 
-          <div>{setC()}</div>
+          {setC()}
+
+          <Ticktes />
         </>
       )}
       {!user && (
