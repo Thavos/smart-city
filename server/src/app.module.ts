@@ -12,6 +12,7 @@ import { ManagerModule } from './database/manager/manager.module';
 import { TicketModule } from './database/ticket/ticket.module';
 import { CommentModule } from './database/comment/comment.module';
 import { ServicerequestModule } from './database/servicerequest/servicerequest.module';
+import { PrismaService } from './database/prisma.service';
 
 @Module({
   imports: [
@@ -38,6 +39,6 @@ import { ServicerequestModule } from './database/servicerequest/servicerequest.m
     ServicerequestModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
