@@ -13,10 +13,10 @@ export const Register: FC = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    fetch("/graphql", {
+    await fetch("/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,6 +35,7 @@ export const Register: FC = () => {
     })
       .then((r) => r.json())
       .then((data) => {
+        console.log(data);
         if (data.data.createUser.id !== "0") {
           navigate("/profile");
         }

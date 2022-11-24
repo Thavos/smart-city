@@ -11,10 +11,10 @@ export const Login: FC = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    fetch("/graphql", {
+    await fetch("/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,6 +33,7 @@ export const Login: FC = () => {
     })
       .then((r) => r.json())
       .then((data) => {
+        console.log(data);
         if (
           data.data.login.id !== "WrongPassword" &&
           data.data.login.id !== "UnknownUser"
