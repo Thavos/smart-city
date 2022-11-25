@@ -16,7 +16,7 @@ export const Register: FC = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    await fetch("/api/graphql", {
+    await fetch("/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -38,7 +38,7 @@ export const Profile: FC = () => {
   };
 
   useEffect(() => {
-    fetch("/api/graphql", {
+    fetch("/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export const Profile: FC = () => {
       .then((data) => {
         setUser(data.data.profile);
       });
-  });
+  }, []);
 
   return (
     <>

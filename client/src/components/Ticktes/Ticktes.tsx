@@ -14,7 +14,7 @@ export const Ticktes: FC = () => {
   const [tickets, setTickets] = useState<[TicketType]>();
 
   useEffect(() => {
-    fetch("/api/graphql", {
+    fetch("/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export const Ticktes: FC = () => {
             return (
               <li style={{ color: "white" }}>
                 <div>{c.name}</div>
-                <div>{new Date(1668988800000).toString()}</div>
+                <div>{new Date(parseInt(c.createdAt)).toString()}</div>
                 <div>{c.state}</div>
                 <div>{c.userId}</div>
                 <div>{c.desc}</div>

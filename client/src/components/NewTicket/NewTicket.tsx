@@ -9,7 +9,7 @@ export const NewTicket: FC = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    fetch("/api/graphql", {
+    fetch("/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

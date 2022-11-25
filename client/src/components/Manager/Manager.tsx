@@ -5,8 +5,8 @@ import styles from "./Manager.module.css";
 export const Manager: FC = () => {
   return (
     <>
-      <p>Manager menu</p>
       <Ticktes />
+      <p>Manager menu</p>
       <p>My service tickets</p>
     </>
   );
