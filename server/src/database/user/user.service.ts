@@ -78,12 +78,6 @@ export class UserService {
     });
   }
 
-  filter() {
-    return this.prisma.user.findMany({
-      where: { AND: [] },
-    });
-  }
-
   findAll() {
     return this.prisma.user.findMany();
   }

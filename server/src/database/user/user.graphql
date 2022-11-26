@@ -5,10 +5,6 @@ type User {
   email: String!
   pwd: String!
   authId: Int!
-  Technician: Technician
-  Manager: Manager
-  comments: [Comment!]
-  tickets: [Ticket!]
 }
 
 input CreateUserInput {
@@ -19,7 +15,7 @@ input CreateUserInput {
 }
 
 input UpdateUserInput {
-  id: String
+  id: String!
   name: String
   surn: String
   email: String
@@ -33,9 +29,8 @@ input LoginUserInput {
 }
 
 type Query {
-  filter(filter: String!): [User]
-  user: [User]
-  users(id: String!): User
+  users: [User]
+  user(id: String!): User
   profile: User
   login(loginUserInput: LoginUserInput!): User
 }

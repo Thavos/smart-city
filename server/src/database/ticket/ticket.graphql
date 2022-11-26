@@ -23,8 +23,8 @@ input UpdateTicketInput {
 }
 
 type Query {
-  ticket: [Ticket]
-  tickets(id: String!): Ticket
+  tickets: [Ticket]
+  ticket(id: String!): Ticket
 }
 
 type Mutation {

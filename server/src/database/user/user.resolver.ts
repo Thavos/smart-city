@@ -45,11 +45,6 @@ export class UserResolver {
     return result;
   }
 
-  @Query('filter')
-  filter(filter: string) {
-    return.this.userService.filter(filter);
-  }
-
   @Query('users')
   findAll() {
     return this.userService.findAll();
@@ -61,13 +56,13 @@ export class UserResolver {
   }
 
   @Mutation('updateUser')
-  @Roles('admin')
+  //@Roles('admin')
   update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.userService.update(updateUserInput.id, updateUserInput);
   }
 
   @Mutation('removeUser')
-  @Roles('admin')
+  //@Roles('admin')
   remove(@Args('id') id: string) {
     return this.userService.remove(id);
   }

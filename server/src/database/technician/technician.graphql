@@ -13,8 +13,8 @@ input UpdateTechnicianInput {
 }
 
 type Query {
-  technician: [Technician]
-  technicians(id: String!): Technician
+  technicians: [Technician]
+  technician(id: String!): Technician
 }
 
 type Mutation {

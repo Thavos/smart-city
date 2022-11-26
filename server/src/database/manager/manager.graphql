@@ -13,8 +13,8 @@ input UpdateManagerInput {
 }
 
 type Query {
-  manager: [Manager]
-  managers(id: String!): Manager
+  managers: [Manager]
+  manager(id: String!): Manager
 }
 
 type Mutation {

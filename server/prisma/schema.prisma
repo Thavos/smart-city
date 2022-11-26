@@ -31,9 +31,8 @@ model User {
   authId     Int // 0 - User |  1 - Technician | 2 - Manager | 3 - Admin
   Technician Technician?
   Manager    Manager?
-  // Admin      Admin?
-  comments   Comment[]
-  tickets    Ticket[]
+  Ticket     Ticket[]
+  Comment    Comment[]
 }
 
 model Technician {
@@ -74,11 +73,14 @@ model Comment {
 
   createAt DateTime @default(now())
 
-  user   User   @relation(fields: [userId], references: [id])
+  User   User   @relation(fields: [userId], references: [id])
   userId String
 
-  ticket   Ticket @relation(fields: [ticketId], references: [id])
+  Ticket   Ticket @relation(fields: [ticketId], references: [id])
   ticketId String
+
+  ServiceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id])
+  serviceRequestId String
 }
 
 model ServiceRequest {
@@ -89,15 +91,15 @@ model ServiceRequest {
   state Int // 0 - open | 1 - in progress | 2 - closed | 3 - problem
 
   expectedFinish DateTime
-  comment        String
+  comments       Comment[]
   price          Float
 
   createAt DateTime @default(now())
 
-  technician   Technician @relation(fields: [technicianId], references: [id])
+  Technician   Technician @relation(fields: [technicianId], references: [id])
   technicianId String
 
-  manager   Manager @relation(fields: [managerId], references: [id])
+  Manager   Manager @relation(fields: [managerId], references: [id])
   managerId String
 }
 
