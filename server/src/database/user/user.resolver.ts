@@ -1,6 +1,8 @@
-import { Req, Res } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
-import { Request, Response } from 'express';
+import { Request } from 'express';
+import { Roles } from 'src/auth/roles.decorator';
+import { RolesGuard } from 'src/auth/roles.guard';
 import {
   CreateUserInput,
   LoginUserInput,
@@ -9,6 +11,7 @@ import {
 import { UserService } from './user.service';
 
 @Resolver('User')
+@UseGuards(RolesGuard)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
@@ -42,22 +45,29 @@ export class UserResolver {
     return result;
   }
 
-  @Query('user')
+  @Query('filter')
+  filter(filter: string) {
+    return.this.userService.filter(filter);
+  }
+
+  @Query('users')
   findAll() {
     return this.userService.findAll();
   }
 
-  @Query('users')
+  @Query('user')
   findOne(@Args('id') id: string) {
     return this.userService.findOne(id);
   }
 
   @Mutation('updateUser')
+  @Roles('admin')
   update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.userService.update(updateUserInput.id, updateUserInput);
   }
 
   @Mutation('removeUser')
+  @Roles('admin')
   remove(@Args('id') id: string) {
     return this.userService.remove(id);
   }

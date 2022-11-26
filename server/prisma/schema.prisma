@@ -70,6 +70,8 @@ model Comment {
   id   String @id @unique @default(cuid())
   desc String
 
+  isService Boolean
+
   createAt DateTime @default(now())
 
   user   User   @relation(fields: [userId], references: [id])

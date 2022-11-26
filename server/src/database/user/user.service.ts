@@ -25,7 +25,7 @@ export class UserService {
     let userId: string;
 
     await this.prisma.user
-      .findFirst({
+      .findUnique({
         where: {
           email: loginUserInput.email,
         },
@@ -75,6 +75,12 @@ export class UserService {
 
     return this.prisma.user.create({
       data: { ...newUser, authId: 0 },
+    });
+  }
+
+  filter() {
+    return this.prisma.user.findMany({
+      where: { AND: [] },
     });
   }
 

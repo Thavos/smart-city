@@ -9,8 +9,6 @@ export const Register: FC = () => {
   const [email, setEmail] = useState<string>();
   const [pwd, setPwd] = useState<string>();
 
-  const [data, setData] = useState<any>();
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {

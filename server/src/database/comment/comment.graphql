@@ -1,30 +1,30 @@
 type Comment {
   id: String!
   desc: String!
-  createAt: String!
+  createAt: Int!
   userId: String!
   ticketId: String!
 }
 
 input CreateCommentInput {
   desc: String!
-  createAt: String!
+  createAt: Int!
   userId: String!
   ticketId: String!
 }
 
 input UpdateCommentInput {
-  id: String!
-  desc: String!
+  id: String
+  desc: String
 }
 
 type Query {
-  comment: [Comment]!
+  comment: [Comment]
   comments(id: String!): Comment
 }
 
 type Mutation {
-  createComment(createCommentInput: CreateCommentInput!): Comment!
-  updateComment(updateCommentInput: UpdateCommentInput!): Comment!
+  createComment(createCommentInput: CreateCommentInput!): Comment
+  updateComment(updateCommentInput: UpdateCommentInput!): Comment
   removeComment(id: String!): Comment
 }

@@ -11,12 +11,12 @@ export class CommentResolver {
     return this.commentService.create(createCommentInput);
   }
 
-  @Query('comment')
+  @Query('comments')
   findAll() {
     return this.commentService.findAll();
   }
 
-  @Query('comments')
+  @Query('comment')
   findOne(@Args('id') id: string) {
     return this.commentService.findOne(id);
   }

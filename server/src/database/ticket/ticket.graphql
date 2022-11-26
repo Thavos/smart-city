@@ -12,23 +12,23 @@ input CreateTicketInput {
   desc: String!
   state: Int!
   userId: String!
+  createdAt: String!
 }
 
 input UpdateTicketInput {
-  id: String!
-  name: String!
-  desc: String!
-  state: Int!
-  userId: String!
+  id: String
+  name: String
+  desc: String
+  state: Int
 }
 
 type Query {
-  ticket: [Ticket]!
+  ticket: [Ticket]
   tickets(id: String!): Ticket
 }
 
 type Mutation {
-  createTicket(createTicketInput: CreateTicketInput): Ticket
-  updateTicket(updateTicketInput: UpdateTicketInput): Ticket
-  removeTicket(id: String): Ticket
+  createTicket(createTicketInput: CreateTicketInput!): Ticket
+  updateTicket(updateTicketInput: UpdateTicketInput!): Ticket
+  removeTicket(id: String!): Ticket
 }

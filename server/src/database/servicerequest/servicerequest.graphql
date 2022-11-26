@@ -23,7 +23,7 @@ input CreateServicerequestInput {
 }
 
 input UpdateServicerequestInput {
-  id: String!
+  id: String
   name: String
   desc: String
   state: Int
@@ -35,16 +35,16 @@ input UpdateServicerequestInput {
 }
 
 type Query {
-  servicerequest: [Servicerequest]!
+  servicerequest: [Servicerequest]
   servicerequests(id: String!): Servicerequest
 }
 
 type Mutation {
   createServicerequest(
-    createServicerequestInput: CreateServicerequestInput
+    createServicerequestInput: CreateServicerequestInput!
   ): Servicerequest
   updateServicerequest(
-    updateServicerequestInput: UpdateServicerequestInput
+    updateServicerequestInput: UpdateServicerequestInput!
   ): Servicerequest
-  removeServicerequest(id: String): Servicerequest
+  removeServicerequest(id: String!): Servicerequest
 }
