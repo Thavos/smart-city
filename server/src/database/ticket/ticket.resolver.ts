@@ -21,12 +21,12 @@ export class TicketResolver {
     return this.ticketService.create(data);
   }
 
-  @Query('ticket')
+  @Query('tickets')
   findAll() {
     return this.ticketService.findAll();
   }
 
-  @Query('tickets')
+  @Query('ticket')
   findOne(@Args('id') id: string) {
     return this.ticketService.findOne(id);
   }

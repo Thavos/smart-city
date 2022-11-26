@@ -17,12 +17,12 @@ export class ServicerequestResolver {
     return this.servicerequestService.create(createServicerequestInput);
   }
 
-  @Query('servicerequest')
+  @Query('servicerequests')
   findAll() {
     return this.servicerequestService.findAll();
   }
 
-  @Query('servicerequests')
+  @Query('servicerequest')
   findOne(@Args('id') id: string) {
     return this.servicerequestService.findOne(id);
   }

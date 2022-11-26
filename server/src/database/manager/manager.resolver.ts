@@ -11,12 +11,12 @@ export class ManagerResolver {
     return this.managerService.create(createManagerInput);
   }
 
-  @Query('manager')
+  @Query('managers')
   findAll() {
     return this.managerService.findAll();
   }
 
-  @Query('managers')
+  @Query('manager')
   findOne(@Args('id') id: string) {
     return this.managerService.findOne(id);
   }

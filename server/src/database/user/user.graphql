@@ -5,10 +5,6 @@ type User {
   email: String!
   pwd: String!
   authId: Int!
-  Technician: Technician!
-  Manager: Manager!
-  comments: [Comment!]!
-  tickets: [Ticket!]!
 }
 
 input CreateUserInput {
@@ -20,11 +16,11 @@ input CreateUserInput {
 
 input UpdateUserInput {
   id: String!
-  name: String!
-  surn: String!
-  email: String!
-  pwd: String!
-  authId: Int!
+  name: String
+  surn: String
+  email: String
+  pwd: String
+  authId: Int
 }
 
 input LoginUserInput {
@@ -33,14 +29,14 @@ input LoginUserInput {
 }
 
 type Query {
-  user: [User]!
-  users(id: String!): User
+  users: [User]
+  user(id: String!): User
   profile: User
-  login(loginUserInput: LoginUserInput): User!
+  login(loginUserInput: LoginUserInput!): User
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput): User
-  updateUser(updateUserInput: UpdateUserInput): User
+  createUser(createUserInput: CreateUserInput!): User
+  updateUser(updateUserInput: UpdateUserInput!): User
   removeUser(id: String): User
 }

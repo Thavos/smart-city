@@ -10,14 +10,14 @@
 
 export class CreateCommentInput {
     desc: string;
-    createAt: string;
+    createAt: number;
     userId: string;
     ticketId: string;
 }
 
 export class UpdateCommentInput {
-    id: string;
-    desc: string;
+    id?: Nullable<string>;
+    desc?: Nullable<string>;
 }
 
 export class CreateManagerInput {
@@ -25,8 +25,8 @@ export class CreateManagerInput {
 }
 
 export class UpdateManagerInput {
-    id: string;
-    userId: string;
+    id?: Nullable<string>;
+    userId?: Nullable<string>;
 }
 
 export class CreateServicerequestInput {
@@ -34,14 +34,13 @@ export class CreateServicerequestInput {
     desc: string;
     state: number;
     expectedFinish: string;
-    commnet: string;
     price: number;
     managerId: string;
     technicianId: string;
 }
 
 export class UpdateServicerequestInput {
-    id: string;
+    id?: Nullable<string>;
     name?: Nullable<string>;
     desc?: Nullable<string>;
     state?: Nullable<number>;
@@ -57,8 +56,8 @@ export class CreateTechnicianInput {
 }
 
 export class UpdateTechnicianInput {
-    id: string;
-    userId: string;
+    id?: Nullable<string>;
+    userId?: Nullable<string>;
 }
 
 export class CreateTicketInput {
@@ -66,14 +65,14 @@ export class CreateTicketInput {
     desc: string;
     state: number;
     userId: string;
+    createdAt: string;
 }
 
 export class UpdateTicketInput {
-    id: string;
-    name: string;
-    desc: string;
-    state: number;
-    userId: string;
+    id?: Nullable<string>;
+    name?: Nullable<string>;
+    desc?: Nullable<string>;
+    state?: Nullable<number>;
 }
 
 export class CreateUserInput {
@@ -85,11 +84,11 @@ export class CreateUserInput {
 
 export class UpdateUserInput {
     id: string;
-    name: string;
-    surn: string;
-    email: string;
-    pwd: string;
-    authId: number;
+    name?: Nullable<string>;
+    surn?: Nullable<string>;
+    email?: Nullable<string>;
+    pwd?: Nullable<string>;
+    authId?: Nullable<number>;
 }
 
 export class LoginUserInput {
@@ -100,75 +99,75 @@ export class LoginUserInput {
 export class Comment {
     id: string;
     desc: string;
-    createAt: string;
+    createAt: number;
     userId: string;
     ticketId: string;
 }
 
 export abstract class IQuery {
-    abstract comment(): Nullable<Comment>[] | Promise<Nullable<Comment>[]>;
+    abstract comment(): Nullable<Nullable<Comment>[]> | Promise<Nullable<Nullable<Comment>[]>>;
 
     abstract comments(id: string): Nullable<Comment> | Promise<Nullable<Comment>>;
 
-    abstract manager(): Nullable<Manager>[] | Promise<Nullable<Manager>[]>;
+    abstract managers(): Nullable<Nullable<Manager>[]> | Promise<Nullable<Nullable<Manager>[]>>;
 
-    abstract managers(id: string): Nullable<Manager> | Promise<Nullable<Manager>>;
+    abstract manager(id: string): Nullable<Manager> | Promise<Nullable<Manager>>;
 
-    abstract servicerequest(): Nullable<Servicerequest>[] | Promise<Nullable<Servicerequest>[]>;
+    abstract servicerequests(): Nullable<Nullable<Servicerequest>[]> | Promise<Nullable<Nullable<Servicerequest>[]>>;
 
-    abstract servicerequests(id: string): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
+    abstract servicerequest(id: string): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
 
-    abstract technician(): Nullable<Technician>[] | Promise<Nullable<Technician>[]>;
+    abstract technicians(): Nullable<Nullable<Technician>[]> | Promise<Nullable<Nullable<Technician>[]>>;
 
-    abstract technicians(id: string): Nullable<Technician> | Promise<Nullable<Technician>>;
+    abstract technician(id: string): Nullable<Technician> | Promise<Nullable<Technician>>;
 
-    abstract ticket(): Nullable<Ticket>[] | Promise<Nullable<Ticket>[]>;
+    abstract tickets(): Nullable<Nullable<Ticket>[]> | Promise<Nullable<Nullable<Ticket>[]>>;
 
-    abstract tickets(id: string): Nullable<Ticket> | Promise<Nullable<Ticket>>;
+    abstract ticket(id: string): Nullable<Ticket> | Promise<Nullable<Ticket>>;
 
-    abstract user(): Nullable<User>[] | Promise<Nullable<User>[]>;
+    abstract users(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
 
-    abstract users(id: string): Nullable<User> | Promise<Nullable<User>>;
+    abstract user(id: string): Nullable<User> | Promise<Nullable<User>>;
 
     abstract profile(): Nullable<User> | Promise<Nullable<User>>;
 
-    abstract login(loginUserInput?: Nullable<LoginUserInput>): User | Promise<User>;
+    abstract login(loginUserInput: LoginUserInput): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export abstract class IMutation {
-    abstract createComment(createCommentInput: CreateCommentInput): Comment | Promise<Comment>;
+    abstract createComment(createCommentInput: CreateCommentInput): Nullable<Comment> | Promise<Nullable<Comment>>;
 
-    abstract updateComment(updateCommentInput: UpdateCommentInput): Comment | Promise<Comment>;
+    abstract updateComment(updateCommentInput: UpdateCommentInput): Nullable<Comment> | Promise<Nullable<Comment>>;
 
     abstract removeComment(id: string): Nullable<Comment> | Promise<Nullable<Comment>>;
 
-    abstract createManager(createManagerInput: CreateManagerInput): Manager | Promise<Manager>;
+    abstract createManager(createManagerInput: CreateManagerInput): Nullable<Manager> | Promise<Nullable<Manager>>;
 
-    abstract updateManager(updateManagerInput: UpdateManagerInput): Manager | Promise<Manager>;
+    abstract updateManager(updateManagerInput: UpdateManagerInput): Nullable<Manager> | Promise<Nullable<Manager>>;
 
     abstract removeManager(id: string): Nullable<Manager> | Promise<Nullable<Manager>>;
 
-    abstract createServicerequest(createServicerequestInput?: Nullable<CreateServicerequestInput>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
+    abstract createServicerequest(createServicerequestInput: CreateServicerequestInput): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
 
-    abstract updateServicerequest(updateServicerequestInput?: Nullable<UpdateServicerequestInput>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
+    abstract updateServicerequest(updateServicerequestInput: UpdateServicerequestInput): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
 
-    abstract removeServicerequest(id?: Nullable<string>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
+    abstract removeServicerequest(id: string): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
 
-    abstract createTechnician(createTechnicianInput: CreateTechnicianInput): Technician | Promise<Technician>;
+    abstract createTechnician(createTechnicianInput: CreateTechnicianInput): Nullable<Technician> | Promise<Nullable<Technician>>;
 
-    abstract updateTechnician(updateTechnicianInput: UpdateTechnicianInput): Technician | Promise<Technician>;
+    abstract updateTechnician(updateTechnicianInput: UpdateTechnicianInput): Nullable<Technician> | Promise<Nullable<Technician>>;
 
     abstract removeTechnician(id: string): Nullable<Technician> | Promise<Nullable<Technician>>;
 
-    abstract createTicket(createTicketInput?: Nullable<CreateTicketInput>): Nullable<Ticket> | Promise<Nullable<Ticket>>;
+    abstract createTicket(createTicketInput: CreateTicketInput): Nullable<Ticket> | Promise<Nullable<Ticket>>;
 
-    abstract updateTicket(updateTicketInput?: Nullable<UpdateTicketInput>): Nullable<Ticket> | Promise<Nullable<Ticket>>;
+    abstract updateTicket(updateTicketInput: UpdateTicketInput): Nullable<Ticket> | Promise<Nullable<Ticket>>;
 
-    abstract removeTicket(id?: Nullable<string>): Nullable<Ticket> | Promise<Nullable<Ticket>>;
+    abstract removeTicket(id: string): Nullable<Ticket> | Promise<Nullable<Ticket>>;
 
-    abstract createUser(createUserInput?: Nullable<CreateUserInput>): Nullable<User> | Promise<Nullable<User>>;
+    abstract createUser(createUserInput: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
 
-    abstract updateUser(updateUserInput?: Nullable<UpdateUserInput>): Nullable<User> | Promise<Nullable<User>>;
+    abstract updateUser(updateUserInput: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
 
     abstract removeUser(id?: Nullable<string>): Nullable<User> | Promise<Nullable<User>>;
 }
@@ -184,7 +183,6 @@ export class Servicerequest {
     desc: string;
     state: number;
     expectedFinish: string;
-    commnet: string;
     price: number;
     createdAt: string;
     managerId: string;
@@ -212,10 +210,6 @@ export class User {
     email: string;
     pwd: string;
     authId: number;
-    Technician: Technician;
-    Manager: Manager;
-    comments: Comment[];
-    tickets: Ticket[];
 }
 
 type Nullable<T> = T | null;

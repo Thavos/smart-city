@@ -16,12 +16,12 @@ export class TechnicianResolver {
     return this.technicianService.create(createTechnicianInput);
   }
 
-  @Query('technician')
+  @Query('technicians')
   findAll() {
     return this.technicianService.findAll();
   }
 
-  @Query('technicians')
+  @Query('technician')
   findOne(@Args('id') id: string) {
     return this.technicianService.findOne(id);
   }

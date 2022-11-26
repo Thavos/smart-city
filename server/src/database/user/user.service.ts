@@ -25,7 +25,7 @@ export class UserService {
     let userId: string;
 
     await this.prisma.user
-      .findFirst({
+      .findUnique({
         where: {
           email: loginUserInput.email,
         },

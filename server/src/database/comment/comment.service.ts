@@ -8,6 +8,8 @@ export class CommentService {
 
   create(createCommentInput: CreateCommentInput) {
     return this.prisma.comment.create({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore TODO:
       data: createCommentInput,
     });
   }

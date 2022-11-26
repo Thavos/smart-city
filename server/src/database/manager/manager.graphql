@@ -8,17 +8,17 @@ input CreateManagerInput {
 }
 
 input UpdateManagerInput {
-  id: String!
-  userId: String!
+  id: String
+  userId: String
 }
 
 type Query {
-  manager: [Manager]!
-  managers(id: String!): Manager
+  managers: [Manager]
+  manager(id: String!): Manager
 }
 
 type Mutation {
-  createManager(createManagerInput: CreateManagerInput!): Manager!
-  updateManager(updateManagerInput: UpdateManagerInput!): Manager!
+  createManager(createManagerInput: CreateManagerInput!): Manager
+  updateManager(updateManagerInput: UpdateManagerInput!): Manager
   removeManager(id: String!): Manager
 }
