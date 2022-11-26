@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./Ticktes.module.css";
 import { NewTicket } from "../NewTicket";
+import moment from 'moment';
 
 type TicketType = {
   name: string;
@@ -42,27 +43,25 @@ export const Ticktes: FC = () => {
   return (
     <div>
       <NewTicket />
-      <h2>Tickets</h2>
-      <div style={{ color: "white" }}>
-        <p>Ticket Label</p>
-        <p>Date</p>
-        <p>State</p>
-        <p>User</p>
-      </div>
-      <ul>
+      {/* <div className={ styles["head-parent"] }>
+        <p className={ styles["head-child"] }>Ticket Label</p>
+        <p className={ styles["head-child"] }>Date</p>
+        <p className={ styles["head-child"] }>State</p>
+        <p className={ styles["head-child"] }>User</p>
+      </div> */}
+      <div className={ styles["all-tickets"]}>
         {tickets &&
           tickets.map((c) => {
             return (
-              <li style={{ color: "white" }}>
-                <div>{c.name}</div>
-                <div>{new Date(parseInt(c.createdAt)).toString()}</div>
-                <div>{c.state}</div>
-                <div>{c.userId}</div>
-                <div>{c.desc}</div>
-              </li>
+              <div className={ styles["ticket"] }>
+                <header className={ styles["ticket-name"] }>{c.name}</header>
+                <div className={ styles["ticket-date"] }>{new Intl.DateTimeFormat("cs-CZ", {year: "numeric", month: "2-digit", day: "2-digit"}).format(parseInt(c.createdAt))}</div>
+                <div className={ styles["ticket-state"] }>{c.state}</div>
+                <div className={ styles["ticket-dsc"] }><p>{c.desc}</p></div>
+              </div>
             );
           })}
-      </ul>
+      </div>
     </div>
   );
 };
