@@ -7,7 +7,7 @@ import { Citizen } from "../../components/Citizen";
 import { Technician } from "../../components/Technician";
 import { Manager } from "../../components/Manager";
 import { Admin } from "../../components/Admin";
-import { Ticktes } from "../../components/Ticktes";
+import { Tickets } from "../../components/Tickets";
 
 enum auhtority {
   "Citizen" = 0,
@@ -32,8 +32,11 @@ export const Profile: FC = () => {
   });
   let C: any;
 
+  console.log(user);
   const setC = () => {
+    console.log(user);
     if (user) C = ProfileType[user.authId];
+    console.log(ProfileType[user.authId]);
     return <C />;
   };
 
@@ -60,6 +63,7 @@ export const Profile: FC = () => {
       });
   }, []);
 
+  console.log(user);
   return (
     <>
       {user && (
@@ -68,7 +72,7 @@ export const Profile: FC = () => {
 
           {setC()}
 
-          <Ticktes />
+          <Tickets />
         </>
       )}
       {!user && (

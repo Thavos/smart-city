@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import styles from "./Ticktes.module.css";
+import styles from "./Tickets.module.css";
 import { NewTicket } from "../NewTicket";
 
 type TicketType = {
@@ -10,7 +10,7 @@ type TicketType = {
   userId: number;
 };
 
-export const Ticktes: FC = () => {
+export const Tickets: FC = () => {
   const [tickets, setTickets] = useState<[TicketType]>();
 
   useEffect(() => {

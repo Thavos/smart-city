@@ -1,13 +1,16 @@
 import { FC } from "react";
-import { Ticktes } from "../Ticktes";
+import { Tickets } from "../Tickets";
 import styles from "./Manager.module.css";
+import {MenuBar} from "../MenuBar";
+import {Button} from "@mui/material";
 
 export const Manager: FC = () => {
-  return (
-    <>
-      <Ticktes />
-      <p>Manager menu</p>
-      <p>My service tickets</p>
-    </>
-  );
+    const tickets = [];
+    console.log("fetch na získání všech service ticketů do arraye tickets");
+    //fetch
+    return (
+        <>
+            <Button href="/serviceticket">Service tickets</Button>
+        </>
+    );
 };
