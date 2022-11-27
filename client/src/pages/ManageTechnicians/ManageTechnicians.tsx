@@ -1,15 +1,15 @@
 import {FC, useEffect, useState} from "react";
 import {MenuBar} from "../../components/MenuBar";
-import {ManageUsersTable} from "../../components/ManageUsers/ManageUsers";
+import {ManageTechniciansTable} from "../../components/ManageUsers/ManageUsers";
 
-export const ManageUsers: FC = () => {
+export const ManageTechnicians: FC = () => {
 
 
 
     return(
         <div>
             <MenuBar name="" surn=""/>
-            <ManageUsersTable />
+            <ManageTechniciansTable />
         </div>
     )
 }
