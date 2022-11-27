@@ -6,9 +6,9 @@ export const Admin: FC = () => {
   return (
     <>
       <p>Admin menu</p>
-        <a className={classnames(styles["btn"])} href="/manageusers">
+      <a className={classnames(styles["btn"])} href="/manageusers">
         Manage Users
-        </a>
+      </a>
       <p>Tickets</p>
       <p>Service tickets</p>
       <p>Users</p>
