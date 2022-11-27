@@ -34,15 +34,15 @@ input UpdateServicerequestInput {
 
 type Query {
   servicerequests: [Servicerequest]
-  servicerequest(id: String!): Servicerequest
+  servicerequest(id: String): Servicerequest
 }
 
 type Mutation {
   createServicerequest(
-    createServicerequestInput: CreateServicerequestInput!
+    createServicerequestInput: CreateServicerequestInput
   ): Servicerequest
   updateServicerequest(
-    updateServicerequestInput: UpdateServicerequestInput!
+    updateServicerequestInput: UpdateServicerequestInput
   ): Servicerequest
-  removeServicerequest(id: String!): Servicerequest
+  removeServicerequest(id: String): Servicerequest
 }

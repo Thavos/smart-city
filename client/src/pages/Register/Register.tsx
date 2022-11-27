@@ -22,10 +22,10 @@ export const Register: FC = () => {
       },
       body: JSON.stringify({
         query: `mutation createUser($createUserInput: CreateUserInput) {
-                createUser(createUserInput: $createUserInput) {
-                id
-              }
-            }`,
+                  createUser(createUserInput: $createUserInput) {
+                    id
+                  }
+                }`,
         variables: {
           createUserInput: { name: name, surn: surn, email: email, pwd: pwd },
         },

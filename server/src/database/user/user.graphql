@@ -30,13 +30,13 @@ input LoginUserInput {
 
 type Query {
   users: [User]
-  user(id: String!): User
+  user(id: String): User
   profile: User
-  login(loginUserInput: LoginUserInput!): User
+  login(loginUserInput: LoginUserInput): User
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User
-  updateUser(updateUserInput: UpdateUserInput!): User
+  createUser(createUserInput: CreateUserInput): User
+  updateUser(updateUserInput: UpdateUserInput): User
   removeUser(id: String): User
 }

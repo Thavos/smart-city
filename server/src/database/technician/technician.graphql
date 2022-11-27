@@ -14,11 +14,11 @@ input UpdateTechnicianInput {
 
 type Query {
   technicians: [Technician]
-  technician(id: String!): Technician
+  technician(id: String): Technician
 }
 
 type Mutation {
-  createTechnician(createTechnicianInput: CreateTechnicianInput!): Technician
-  updateTechnician(updateTechnicianInput: UpdateTechnicianInput!): Technician
-  removeTechnician(id: String!): Technician
+  createTechnician(createTechnicianInput: CreateTechnicianInput): Technician
+  updateTechnician(updateTechnicianInput: UpdateTechnicianInput): Technician
+  removeTechnician(id: String): Technician
 }

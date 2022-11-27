@@ -24,11 +24,11 @@ input UpdateTicketInput {
 
 type Query {
   tickets: [Ticket]
-  ticket(id: String!): Ticket
+  ticket(id: String): Ticket
 }
 
 type Mutation {
-  createTicket(createTicketInput: CreateTicketInput!): Ticket
-  updateTicket(updateTicketInput: UpdateTicketInput!): Ticket
-  removeTicket(id: String!): Ticket
+  createTicket(createTicketInput: CreateTicketInput): Ticket
+  updateTicket(updateTicketInput: UpdateTicketInput): Ticket
+  removeTicket(id: String): Ticket
 }
