@@ -62,6 +62,9 @@ export const Ticktes: FC = () => {
             );
           })}
       </div>
+    <div className={ styles["footer-wrapper"] }>
+      <footer>School project</footer>
+    </div>
     </div>
   );
 };

@@ -36,6 +36,7 @@ export const NewTicket: FC = () => {
     <form onSubmit={(e) => handleSubmit(e)} className={styles["form"]}>
       <div className={classnames(styles["input-container"], styles["ic1"])}>
         <input
+          maxLength={30}
           id="label"
           className={styles["input"]}
           type="text"
@@ -54,6 +55,7 @@ export const NewTicket: FC = () => {
 
       <div className={classnames(styles["input-container"], styles["ic2"])}>
         <textarea
+          maxLength={600}
           id="desc"
           className={styles["input"]}
           placeholder=" "
