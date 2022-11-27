@@ -41,7 +41,7 @@ export const Profile: FC = () => {
   };
 
   useEffect(() => {
-    fetch("/api/graphql", {
+    fetch("/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

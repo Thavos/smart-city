@@ -14,7 +14,7 @@ export const Tickets: FC = () => {
   const [tickets, setTickets] = useState<[TicketType]>();
 
   useEffect(() => {
-    fetch("/api/graphql", {
+    fetch("/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export const Tickets: FC = () => {
       },
       body: JSON.stringify({
         query: `query ticket {
-          tickets {
+          ticket {
           name
           desc
           state

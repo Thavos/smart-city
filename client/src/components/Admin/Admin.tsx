@@ -6,7 +6,7 @@ export const Admin: FC = () => {
   return (
     <>
       <p>Admin menu</p>
-        <a className={classnames(styles["btn"])} href="/ManageUsers">
+        <a className={classnames(styles["btn"])} href="/manageusers">
         Manage Users
         </a>
       <p>Tickets</p>
