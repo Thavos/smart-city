@@ -7,7 +7,7 @@ import { Citizen } from "../../components/Citizen";
 import { Technician } from "../../components/Technician";
 import { Manager } from "../../components/Manager";
 import { Admin } from "../../components/Admin";
-import { Tickets } from "../../components/Tickets";
+import { Ticktes } from "../../components/Ticktes";
 
 enum auhtority {
   "Citizen" = 0,
@@ -72,7 +72,7 @@ export const Profile: FC = () => {
 
           {setC()}
 
-          <Tickets />
+          <Ticktes />
         </>
       )}
       {!user && (
