@@ -51,12 +51,10 @@ export class UserService {
     return { id: userId, authId: 0 };
   }
 
-  async create(createUserInput: CreateUserInput) {
-    const newUser = createUserInput;
-
+  async create({ ticket, ...newUser }: CreateUserInput) {
     const exists = await this.prisma.user.findFirst({
       where: {
-        email: createUserInput.email,
+        email: newUser.email,
       },
       select: { id: true },
     });
@@ -65,7 +63,7 @@ export class UserService {
       return { id: '0' };
     }
     const newPWD: string = await new Promise((resolve, reject) => {
-      bcrypt.hash(createUserInput.pwd, saltRounds, (err, hash: string) => {
+      bcrypt.hash(newUser.pwd, saltRounds, (err, hash: string) => {
         if (err) reject(err);
         resolve(hash);
       });
@@ -73,9 +71,25 @@ export class UserService {
 
     newUser.pwd = newPWD;
 
-    return this.prisma.user.create({
+    const user = await this.prisma.user.create({
       data: { ...newUser, authId: 0 },
     });
+
+    if (ticket) {
+      await this.prisma.ticket.create({
+        data: {
+          ...ticket,
+          userId: user.id,
+        },
+      });
+
+      return this.prisma.user.findUnique({
+        where: { id: user.id },
+        include: { tickets: true },
+      });
+    }
+
+    return user;
   }
 
   findAll(
@@ -86,6 +100,7 @@ export class UserService {
     authId: number | null,
     sort: 'name' | 'surn' | 'email' | 'authId' | null,
     sortDir: 'asc' | 'desc' | null,
+    includeTickets: boolean,
   ) {
     const where: Record<string, any> = {};
     const orderBy: Record<string, string>[] = [];
@@ -110,7 +125,12 @@ export class UserService {
       orderBy.push({ [sort]: sortDir });
     }
 
-    return this.prisma.user.findMany({ take: limit || 100, where, orderBy });
+    return this.prisma.user.findMany({
+      take: limit || 100,
+      where,
+      orderBy,
+      include: { tickets: includeTickets },
+    });
   }
 
   findOne(id: string) {

@@ -4,15 +4,15 @@ type Ticket {
   desc: String!
   state: Int!
   createdAt: String!
-  userId: String!
+  user: User
+  userId: String
 }
 
 input CreateTicketInput {
   name: String!
   desc: String!
   state: Int!
-  userId: String!
-  createdAt: String!
+  userId: String
 }
 
 input UpdateTicketInput {
@@ -20,6 +20,7 @@ input UpdateTicketInput {
   name: String
   desc: String
   state: Int
+  userId: String
 }
 
 type Query {
