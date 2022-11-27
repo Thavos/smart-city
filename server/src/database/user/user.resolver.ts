@@ -63,7 +63,8 @@ export class UserResolver {
 
   @Mutation('removeUser')
   //@Roles('admin')
-  remove(@Args('id') id: string) {
-    return this.userService.remove(id);
+  remove(@Context('req') req: Request, @Args('id') id: string) {
+    if (req.cookies['UserID'] == id) return false;
+    else return this.userService.remove(id);
   }
 }

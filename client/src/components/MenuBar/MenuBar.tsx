@@ -29,7 +29,7 @@ export const MenuBar: FC<Props> = ({ name, surn }) => {
         {name} {surn}
       </div>
       <nav className={styles["nav"]}>
-        <a className={classnames(styles["btn"])} href="/">
+        <a className={classnames(styles["btn"])} href="/profile">
           Home
         </a>
         {/*TODO this may result in harming fetch post, need testing*/}

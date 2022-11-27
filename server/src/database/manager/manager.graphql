@@ -14,11 +14,11 @@ input UpdateManagerInput {
 
 type Query {
   managers: [Manager]
-  manager(id: String!): Manager
+  manager(id: String): Manager
 }
 
 type Mutation {
-  createManager(createManagerInput: CreateManagerInput!): Manager
-  updateManager(updateManagerInput: UpdateManagerInput!): Manager
-  removeManager(id: String!): Manager
+  createManager(createManagerInput: CreateManagerInput): Manager
+  updateManager(updateManagerInput: UpdateManagerInput): Manager
+  removeManager(id: String): Manager
 }

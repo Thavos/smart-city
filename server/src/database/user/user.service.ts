@@ -93,12 +93,15 @@ export class UserService {
     return this.prisma.user.update({
       where: { id: id },
       data: updateUserInput,
+      select: { id: true, authId: true },
     });
   }
 
   remove(id: string) {
+    console.log(id);
     return this.prisma.user.delete({
       where: { id: id },
+      select: { id: true },
     });
   }
 }

@@ -7,6 +7,8 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile/Profile";
 import { Register } from "./pages/Register";
+import {ManageUsers} from "./pages/ManageUsers/ManageUsers";
+import {ServiceTicket} from "./pages/ServiceTicket";
 
 function App() {
   const routes = useRoutes([
@@ -25,6 +27,14 @@ function App() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/ManageUsers",
+      element: <ManageUsers/>,
+    },
+    {
+      path: "/serviceticket",
+      element: <ServiceTicket/>,
     },
   ]);
   return routes;
