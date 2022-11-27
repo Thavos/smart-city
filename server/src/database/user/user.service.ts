@@ -78,8 +78,39 @@ export class UserService {
     });
   }
 
-  findAll() {
-    return this.prisma.user.findMany();
+  findAll(
+    limit: number | null,
+    name: string | null,
+    surn: string | null,
+    email: string | null,
+    authId: number | null,
+    sort: 'name' | 'surn' | 'email' | 'authId' | null,
+    sortDir: 'asc' | 'desc' | null,
+  ) {
+    const where: Record<string, any> = {};
+    const orderBy: Record<string, string>[] = [];
+
+    if (name) {
+      where.name = { contains: name };
+    }
+
+    if (surn) {
+      where.surn = { contains: surn };
+    }
+
+    if (email) {
+      where.email = { contains: email };
+    }
+
+    if (authId) {
+      where.authId = { in: authId };
+    }
+
+    if (sort) {
+      orderBy.push({ [sort]: sortDir });
+    }
+
+    return this.prisma.user.findMany({ take: limit || 100, where, orderBy });
   }
 
   findOne(id: string) {

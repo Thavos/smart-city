@@ -8,6 +8,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum SortDir {
+    asc = "asc",
+    desc = "desc"
+}
+
 export class CreateCommentInput {
     desc: string;
     createAt: number;
@@ -125,7 +130,7 @@ export abstract class IQuery {
 
     abstract ticket(id?: Nullable<string>): Nullable<Ticket> | Promise<Nullable<Ticket>>;
 
-    abstract users(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
+    abstract users(limit?: Nullable<number>, name?: Nullable<string>, surn?: Nullable<string>, email?: Nullable<string>, authId?: Nullable<number>, sort?: Nullable<string>, sortDir?: Nullable<SortDir>): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
 
     abstract user(id?: Nullable<string>): Nullable<User> | Promise<Nullable<User>>;
 

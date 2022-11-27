@@ -28,8 +28,21 @@ input LoginUserInput {
   pwd: String!
 }
 
+enum SortDir {
+  asc
+  desc
+}
+
 type Query {
-  users: [User]
+  users(
+    limit: Int
+    name: String
+    surn: String
+    email: String
+    authId: Int
+    sort: String
+    sortDir: SortDir
+  ): [User]
   user(id: String): User
   profile: User
   login(loginUserInput: LoginUserInput): User
