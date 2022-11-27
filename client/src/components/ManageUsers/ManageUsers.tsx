@@ -25,7 +25,7 @@ export default function ManageUsersTable() {
   const [result, setResult] = useState<any>();
 
   useEffect(() => {
-    fetch("/graphql", {
+    fetch("/api/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export default function ManageUsersTable() {
     item: UserType
   ) {
     console.log(item);
-    await fetch("/graphql", {
+    await fetch("/api/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export default function ManageUsersTable() {
   }
 
   async function handleDelete(item: UserType) {
-    await fetch("/graphql", {
+    await fetch("/api/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

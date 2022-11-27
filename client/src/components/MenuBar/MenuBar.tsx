@@ -14,7 +14,7 @@ export const MenuBar: FC<Props> = ({ name, surn }) => {
   const logout = async () => {
     console.log("here");
 
-    await fetch("/logout", {
+    await fetch("/api/logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
