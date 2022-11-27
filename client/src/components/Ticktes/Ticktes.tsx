@@ -36,10 +36,9 @@ export const Ticktes: FC = () => {
       .then((r) => r.json())
       .then((data) => {
         console.log(data);
-        if (data.data.ticket) setTickets(data.data.ticket);
-        console.log(tickets);
+        if (data.data.tickets) setTickets(data.data.tickets);
       });
-  }, []);
+  }, [setTickets]);
 
   return (
     <div>
