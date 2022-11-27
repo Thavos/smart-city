@@ -11,7 +11,6 @@ import { Citizen } from "../Citizen";
 import { Technician } from "../Technician";
 import { Manager } from "../Manager";
 import { Admin } from "../Admin";
-//import {ActionCell} from "./ActionCell";
 
 type UserType = {
   id: string;
@@ -136,18 +135,4 @@ export default function ManageUsersTable() {
       </div>
     </div>
   );
-  /*
-    return(
-        <div >
-            <Box sx={{
-                height: 600,
-                width: '100%'
-            }}>
-                <DataGrid columns={columns} rows={rows} sx={{
-                    borderColor: "white",
-                    color: "white"
-                }}/>
-            </Box>
-        </div>
-    )*/
 }
