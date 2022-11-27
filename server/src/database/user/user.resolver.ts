@@ -46,8 +46,24 @@ export class UserResolver {
   }
 
   @Query('users')
-  findAll() {
-    return this.userService.findAll();
+  findAll(
+    @Args('limit') limit: number | null,
+    @Args('name') name: string | null,
+    @Args('surn') surn: string | null,
+    @Args('email') email: string | null,
+    @Args('authId') authId: number | null,
+    @Args('sort') sort: 'name' | 'surn' | 'email' | 'authId' | null,
+    @Args('sortDir') sortDir: 'asc' | 'desc' | null,
+  ) {
+    return this.userService.findAll(
+      limit,
+      name,
+      surn,
+      email,
+      authId,
+      sort,
+      sortDir,
+    );
   }
 
   @Query('user')
