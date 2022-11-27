@@ -9,6 +9,8 @@ export const Register: FC = () => {
   const [email, setEmail] = useState<string>();
   const [pwd, setPwd] = useState<string>();
 
+  const [data, setData] = useState<any>();
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
@@ -22,10 +24,10 @@ export const Register: FC = () => {
       },
       body: JSON.stringify({
         query: `mutation createUser($createUserInput: CreateUserInput) {
-                  createUser(createUserInput: $createUserInput) {
-                    id
-                  }
-                }`,
+                createUser(createUserInput: $createUserInput) {
+                id
+              }
+            }`,
         variables: {
           createUserInput: { name: name, surn: surn, email: email, pwd: pwd },
         },

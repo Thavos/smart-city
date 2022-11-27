@@ -22,7 +22,7 @@ export const Tickets: FC = () => {
       },
       body: JSON.stringify({
         query: `query ticket {
-          tickets {
+          ticket {
           name
           desc
           state

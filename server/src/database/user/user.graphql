@@ -5,6 +5,10 @@ type User {
   email: String!
   pwd: String!
   authId: Int!
+  technician: Technician
+  manager: Manager
+  comments: [Comment!]
+  tickets: [Ticket!]
 }
 
 input CreateUserInput {
@@ -12,6 +16,7 @@ input CreateUserInput {
   surn: String!
   email: String!
   pwd: String!
+  ticket: CreateTicketInput
 }
 
 input UpdateUserInput {
@@ -29,8 +34,8 @@ input LoginUserInput {
 }
 
 enum SortDir {
-  asc
-  desc
+  ASC
+  DESC
 }
 
 type Query {

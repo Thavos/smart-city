@@ -1,5 +1,12 @@
 import { UseGuards } from '@nestjs/common';
-import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Context,
+  Info,
+} from '@nestjs/graphql';
 import { Request } from 'express';
 import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
@@ -46,6 +53,7 @@ export class UserResolver {
   }
 
   @Query('users')
+  //@Roles('admin')
   findAll(
     @Args('limit') limit: number | null,
     @Args('name') name: string | null,
@@ -54,7 +62,10 @@ export class UserResolver {
     @Args('authId') authId: number | null,
     @Args('sort') sort: 'name' | 'surn' | 'email' | 'authId' | null,
     @Args('sortDir') sortDir: 'asc' | 'desc' | null,
+    @Context('req') body: Request,
   ) {
+    const includeTickets = body.body.query.indexOf('tickets {') > -1;
+
     return this.userService.findAll(
       limit,
       name,
@@ -63,10 +74,12 @@ export class UserResolver {
       authId,
       sort,
       sortDir,
+      includeTickets,
     );
   }
 
   @Query('user')
+  //@Roles('admin')
   findOne(@Args('id') id: string) {
     return this.userService.findOne(id);
   }

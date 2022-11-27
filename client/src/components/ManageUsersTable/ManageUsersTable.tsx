@@ -45,7 +45,6 @@ export default function ManageUsersTable() {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         setResult(data.data.users);
       });
   }, []);
@@ -54,7 +53,7 @@ export default function ManageUsersTable() {
     e: ChangeEvent<HTMLSelectElement>,
     item: UserType
   ) {
-    console.log(item);
+    console.log(item.id);
     await fetch("/api/graphql", {
       method: "POST",
       headers: {
@@ -63,7 +62,7 @@ export default function ManageUsersTable() {
       },
       body: JSON.stringify({
         query: `mutation updateUser($updateUserInput: UpdateUserInput) {
-                  updateUser(id: $updateUserInput) {
+                  updateUser(updateUserInput: $updateUserInput) {
                     id
                   }
                 }`,
@@ -86,7 +85,7 @@ export default function ManageUsersTable() {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        query: `mutation removeUser($removeUserId: string) {
+        query: `mutation removeUser($removeUserId: String) {
                   removeUser(id: $removeUserId){
                     id
                   }

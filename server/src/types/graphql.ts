@@ -9,8 +9,8 @@
 /* eslint-disable */
 
 export enum SortDir {
-    asc = "asc",
-    desc = "desc"
+    ASC = "ASC",
+    DESC = "DESC"
 }
 
 export class CreateCommentInput {
@@ -69,8 +69,7 @@ export class CreateTicketInput {
     name: string;
     desc: string;
     state: number;
-    userId: string;
-    createdAt: string;
+    userId?: Nullable<string>;
 }
 
 export class UpdateTicketInput {
@@ -78,6 +77,7 @@ export class UpdateTicketInput {
     name?: Nullable<string>;
     desc?: Nullable<string>;
     state?: Nullable<number>;
+    userId?: Nullable<string>;
 }
 
 export class CreateUserInput {
@@ -85,6 +85,7 @@ export class CreateUserInput {
     surn: string;
     email: string;
     pwd: string;
+    ticket?: Nullable<CreateTicketInput>;
 }
 
 export class UpdateUserInput {
@@ -205,7 +206,8 @@ export class Ticket {
     desc: string;
     state: number;
     createdAt: string;
-    userId: string;
+    user?: Nullable<User>;
+    userId?: Nullable<string>;
 }
 
 export class User {
@@ -215,6 +217,10 @@ export class User {
     email: string;
     pwd: string;
     authId: number;
+    technician?: Nullable<Technician>;
+    manager?: Nullable<Manager>;
+    comments?: Nullable<Comment[]>;
+    tickets?: Nullable<Ticket[]>;
 }
 
 type Nullable<T> = T | null;

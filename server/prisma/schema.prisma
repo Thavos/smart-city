@@ -23,29 +23,33 @@ datasource db {
 //
 
 model User {
-  id         String      @id @unique @default(cuid())
-  name       String
-  surn       String
-  email      String      @unique
-  pwd        String
-  authId     Int // 0 - User |  1 - Technician | 2 - Manager | 3 - Admin
-  Technician Technician?
-  Manager    Manager?
-  Ticket     Ticket[]
-  Comment    Comment[]
+  id     String @id @unique @default(cuid())
+  name   String
+  surn   String
+  email  String @unique
+  pwd    String
+  authId Int // 0 - User |  1 - Technician | 2 - Manager | 3 - Admin
+
+  technician Technician?
+  manager    Manager?
+
+  tickets  Ticket[]
+  comments Comment[]
 }
 
 model Technician {
-  id             String           @id @unique @default(cuid())
-  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId         String           @unique
+  id     String @id @unique @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
   ServiceRequest ServiceRequest[]
 }
 
 model Manager {
-  id             String           @id @unique @default(cuid())
-  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId         String           @unique
+  id     String @id @unique @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
   ServiceRequest ServiceRequest[]
 }
 
@@ -59,28 +63,8 @@ model Ticket {
 
   comments Comment[]
 
-  User   User   @relation(fields: [userId], references: [id], onDelete: SetDefault)
-  userId String @default("Former Citizen")
-
-  // TODO : how do we add images
-}
-
-model Comment {
-  id   String @id @unique @default(cuid())
-  desc String
-
-  isService Boolean
-
-  createAt DateTime @default(now())
-
-  User   User   @relation(fields: [userId], references: [id], onDelete: SetDefault)
-  userId String @default("Former Citizen")
-
-  Ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
-  ticketId String
-
-  ServiceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
-  serviceRequestId String
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetDefault)
+  userId String? @default("FormerUser")
 }
 
 model ServiceRequest {
@@ -91,16 +75,35 @@ model ServiceRequest {
   state Int // 0 - open | 1 - in progress | 2 - closed | 3 - problem
 
   expectedFinish DateTime
-  comments       Comment[]
   price          Float
 
   createAt DateTime @default(now())
 
-  Technician   Technician @relation(fields: [technicianId], references: [id], onDelete: SetDefault)
-  technicianId String     @default("Former Technician")
+  comments Comment[]
 
-  Manager   Manager @relation(fields: [managerId], references: [id], onDelete: SetDefault)
-  managerId String  @default("Former Manager")
+  Technician   Technician? @relation(fields: [technicianId], references: [id], onDelete: Cascade)
+  technicianId String?     @default("FormerTechnician")
+
+  Manager   Manager? @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  managerId String?  @default("FormerTechnician")
+}
+
+model Comment {
+  id   String @id @unique @default(cuid())
+  desc String
+
+  isService Boolean
+
+  createAt DateTime @default(now())
+
+  User   User?   @relation(fields: [userId], references: [id], onDelete: SetDefault)
+  userId String? @default("FormerUser")
+
+  Ticket   Ticket? @relation(fields: [ticketId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ticketId String?
+
+  ServiceRequest   ServiceRequest? @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  serviceRequestId String?
 }
 
 // TODO : is there a reason to have this ? or we just go with auth id

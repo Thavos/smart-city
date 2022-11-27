@@ -1,7 +1,4 @@
 import { FC } from "react";
-import { Tickets } from "../Tickets";
-import styles from "./Manager.module.css";
-import {MenuBar} from "../MenuBar";
 import {Button} from "@mui/material";
 
 export const Manager: FC = () => {
@@ -11,6 +8,7 @@ export const Manager: FC = () => {
     return (
         <>
             <Button href="/serviceticket">Service tickets</Button>
+            <Button href="/managetechnicians">Manage technicians</Button>
         </>
     );
 };

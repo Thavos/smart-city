@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTicketInput, UpdateTicketInput } from 'src/types/graphql';
+import { CreateTicketInput, UpdateTicketInput, User } from 'src/types/graphql';
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class TicketService {
   }
 
   findAll() {
-    return this.prisma.ticket.findMany();
+    return this.prisma.ticket.findMany({ include: { user: true } });
   }
 
   findOne(id: string) {
