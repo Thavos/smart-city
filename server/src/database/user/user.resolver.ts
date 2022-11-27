@@ -46,6 +46,7 @@ export class UserResolver {
   }
 
   @Query('users')
+  //@Roles('admin')
   findAll(
     @Args('limit') limit: number | null,
     @Args('name') name: string | null,
@@ -67,6 +68,7 @@ export class UserResolver {
   }
 
   @Query('user')
+  //@Roles('admin')
   findOne(@Args('id') id: string) {
     return this.userService.findOne(id);
   }
