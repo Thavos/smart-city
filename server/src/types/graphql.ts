@@ -85,6 +85,8 @@ export class CreateUserInput {
     surn: string;
     email: string;
     pwd: string;
+    techicianInput?: Nullable<CreateTechnicianInput>;
+    managerInput?: Nullable<CreateManagerInput>;
 }
 
 export class UpdateUserInput {
@@ -94,6 +96,8 @@ export class UpdateUserInput {
     email?: Nullable<string>;
     pwd?: Nullable<string>;
     authId?: Nullable<number>;
+    techicianInput?: Nullable<CreateTechnicianInput>;
+    managerInput?: Nullable<CreateManagerInput>;
 }
 
 export class LoginUserInput {
@@ -215,6 +219,8 @@ export class User {
     email: string;
     pwd: string;
     authId: number;
+    technician?: Nullable<Technician>;
+    manager?: Nullable<Manager>;
 }
 
 type Nullable<T> = T | null;
