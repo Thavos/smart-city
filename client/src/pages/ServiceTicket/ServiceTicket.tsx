@@ -56,7 +56,8 @@ export const ServiceTicket = () => {
     NewServiceTicket(
       event.target.name,
       event.target.description.value,
-      event.target.technician.value
+      event.target.technician.value,
+      technicians
     );
   }
 
@@ -212,7 +213,9 @@ export const ServiceTicket = () => {
             <select id="technician">
               {technicians &&
                 technicians.map((item: any) => {
-                  return <option value={item.email}>{item.email}</option>;
+                  return (
+                    <option value={item.user.email}>{item.user.email}</option>
+                  );
                 })}
             </select>
             <p />
@@ -224,7 +227,16 @@ export const ServiceTicket = () => {
   );
 };
 
-function NewServiceTicket(name: String, desc: String, tech: String) {
+function NewServiceTicket(
+  name: String,
+  desc: String,
+  tech: String,
+  technicians: any
+) {
+  technicians.forEach((tech: any) => {
+    if (tech.user.email === tech) tech = tech.id;
+  });
+
   fetch("/api/graphql", {
     method: "POST",
     headers: {
@@ -241,6 +253,10 @@ function NewServiceTicket(name: String, desc: String, tech: String) {
         createServiceRequestInput: {
           name: name,
           desc: desc,
+          state: 0,
+          expectedFinish: "000000000",
+          price: 0,
+          managerId: "null",
           technicianId: tech,
         },
       },

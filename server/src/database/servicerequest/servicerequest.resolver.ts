@@ -20,10 +20,19 @@ export class ServiceRequestResolver {
 
   @Mutation('createServiceRequest')
   @Roles('Admin', 'Manager')
-  create(
+  async create(
     @Args('createServiceRequestInput')
     createServiceRequestInput: CreateServiceRequestInput,
+    @Context('req') req: Request,
   ) {
+    let manager;
+    if (req.cookies['userID'])
+      manager = await this.prisma.manager.findFirst({
+        where: { userId: req.cookies['userID'] },
+      });
+
+    createServiceRequestInput.managerId = manager.id;
+
     return this.ServiceRequestService.create(createServiceRequestInput);
   }
 
