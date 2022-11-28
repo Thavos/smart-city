@@ -7,7 +7,7 @@ export class ManagerService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createManagerInput: CreateManagerInput) {
-    return this.prisma.manager.create({
+    return this.prisma.manager.create({ // @ts-ignore
       data: createManagerInput,
     });
   }

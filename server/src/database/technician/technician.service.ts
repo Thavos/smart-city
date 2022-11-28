@@ -10,7 +10,7 @@ export class TechnicianService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createTechnicianInput: CreateTechnicianInput) {
-    return this.prisma.technician.create({
+    return this.prisma.technician.create({// @ts-ignore
       data: createTechnicianInput,
     });
   }
