@@ -5,13 +5,8 @@ import classnames from "classnames";
 
 export const Citizen: FC = () => {
   return (
-      <>
-        <div className="tex">
-          Citizen site
-        </div>
-        <a className={classnames(styles["btn"])} href="/ManageUsers">
-          Manage Users
-        </a>
-      </>
+      <div className="tex">
+        <p>Citizen</p>
+      </div>
   );
 };

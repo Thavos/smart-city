@@ -2,18 +2,10 @@
   background-color: #15172b;
   border-radius: 1rem;
   box-sizing: border-box;
-  height: 5rem;
-  padding: 1rem;
-  width: 20rem;
-}
-
-.form {
-  background-color: #15172b;
-  border-radius: 1rem;
-  box-sizing: border-box;
   height: 16rem;
   padding: 1rem;
   width: 20rem;
+  font-family: sans-serif;
 }
 
 .input-container {
@@ -43,7 +35,7 @@
   width: 100%;
 }
 
-.cut {
+.cut-name {
   background-color: #15172b;
   border-radius: 10px;
   height: 20px;
@@ -52,21 +44,41 @@
   top: -20px;
   transform: translateY(0);
   transition: transform 200ms;
-  width: 76px;
+  width: 90px;
 }
 
-.cut-short {
+.cut-short-name {
   width: 50px;
 }
 
-.input:focus ~ .cut,
-.input:not(:placeholder-shown) ~ .cut {
+.input:focus ~ .cut-name,
+.input:not(:placeholder-shown) ~ .cut-name {
+  transform: translateY(8px);
+}
+
+.cut-desc {
+  background-color: #15172b;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  width: 80px;
+}
+
+.cut-short-desc {
+  width: 50px;
+}
+
+.input:focus ~ .cut-desc,
+.input:not(:placeholder-shown) ~ .cut-desc {
   transform: translateY(8px);
 }
 
 .placeholder {
   color: #65657b;
-  font-family: sans-serif;
   left: 20px;
   line-height: 14px;
   pointer-events: none;
