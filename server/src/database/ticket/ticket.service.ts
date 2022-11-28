@@ -12,8 +12,35 @@ export class TicketService {
     });
   }
 
-  findAll() {
-    return this.prisma.ticket.findMany({ include: { user: true } });
+  findAll(
+    limit: number | null,
+    name: string | null,
+    state: number | null,
+    sort: 'name' | 'state' | null,
+    sortDir: 'asc' | 'desc' | null,
+    includeUser: boolean,
+  ) {
+    const where: Record<string, any> = {};
+    const orderBy: Record<string, string>[] = [];
+
+    if (name) {
+      where.name = { contains: name };
+    }
+
+    if (state) {
+      where.state = { in: state };
+    }
+
+    if (sort) {
+      orderBy.push({ [sort]: sortDir });
+    }
+
+    return this.prisma.ticket.findMany({
+      take: limit || 100,
+      where,
+      orderBy,
+      include: { user: includeUser },
+    });
   }
 
   findOne(id: string) {

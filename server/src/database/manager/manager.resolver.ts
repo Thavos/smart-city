@@ -1,8 +1,11 @@
+import { UseGuards } from '@nestjs/common';
+import { RolesGuard } from 'src/auth/roles.guard';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { CreateManagerInput, UpdateManagerInput } from 'src/types/graphql';
 import { ManagerService } from './manager.service';
 
 @Resolver('Manager')
+@UseGuards(RolesGuard)
 export class ManagerResolver {
   constructor(private readonly managerService: ManagerService) {}
 

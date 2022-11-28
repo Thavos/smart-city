@@ -1,45 +1,48 @@
+import { UseGuards } from '@nestjs/common';
+import { RolesGuard } from 'src/auth/roles.guard';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { ServicerequestService } from './servicerequest.service';
+import { ServiceRequestService } from './ServiceRequest.service';
 import {
-  CreateServicerequestInput,
-  UpdateServicerequestInput,
+  CreateServiceRequestInput,
+  UpdateServiceRequestInput,
 } from 'src/types/graphql';
 
-@Resolver('Servicerequest')
-export class ServicerequestResolver {
-  constructor(private readonly servicerequestService: ServicerequestService) {}
+@Resolver('ServiceRequest')
+@UseGuards(RolesGuard)
+export class ServiceRequestResolver {
+  constructor(private readonly ServiceRequestService: ServiceRequestService) {}
 
-  @Mutation('createServicerequest')
+  @Mutation('createServiceRequest')
   create(
-    @Args('createServicerequestInput')
-    createServicerequestInput: CreateServicerequestInput,
+    @Args('createServiceRequestInput')
+    createServiceRequestInput: CreateServiceRequestInput,
   ) {
-    return this.servicerequestService.create(createServicerequestInput);
+    return this.ServiceRequestService.create(createServiceRequestInput);
   }
 
-  @Query('servicerequests')
+  @Query('serviceRequests')
   findAll() {
-    return this.servicerequestService.findAll();
+    return this.ServiceRequestService.findAll();
   }
 
-  @Query('servicerequest')
+  @Query('serviceRequest')
   findOne(@Args('id') id: string) {
-    return this.servicerequestService.findOne(id);
+    return this.ServiceRequestService.findOne(id);
   }
 
-  @Mutation('updateServicerequest')
+  @Mutation('updateServiceRequest')
   update(
-    @Args('updateServicerequestInput')
-    updateServicerequestInput: UpdateServicerequestInput,
+    @Args('updateServiceRequestInput')
+    updateServiceRequestInput: UpdateServiceRequestInput,
   ) {
-    return this.servicerequestService.update(
-      updateServicerequestInput.id,
-      updateServicerequestInput,
+    return this.ServiceRequestService.update(
+      updateServiceRequestInput.id,
+      updateServiceRequestInput,
     );
   }
 
-  @Mutation('removeServicerequest')
+  @Mutation('removeServiceRequest')
   remove(@Args('id') id: string) {
-    return this.servicerequestService.remove(id);
+    return this.ServiceRequestService.remove(id);
   }
 }

@@ -1,9 +1,12 @@
+import { UseGuards } from '@nestjs/common';
+import { RolesGuard } from 'src/auth/roles.guard';
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { Request } from 'express';
 import { CreateTicketInput, UpdateTicketInput } from 'src/types/graphql';
 import { TicketService } from './ticket.service';
 
 @Resolver('Ticket')
+@UseGuards(RolesGuard)
 export class TicketResolver {
   constructor(private readonly ticketService: TicketService) {}
 
@@ -22,8 +25,24 @@ export class TicketResolver {
   }
 
   @Query('tickets')
-  findAll() {
-    return this.ticketService.findAll();
+  findAll(
+    @Args('limit') limit: number | null,
+    @Args('name') name: string | null,
+    @Args('state') state: number | null,
+    @Args('sort') sort: 'name' | 'state' | null,
+    @Args('sortDir') sortDir: 'asc' | 'desc' | null,
+    @Context('req') body: Request,
+  ) {
+    const includeUser = body.body.query.indexOf('user {') > -1;
+
+    return this.ticketService.findAll(
+      limit,
+      name,
+      state,
+      sort,
+      sortDir,
+      includeUser,
+    );
   }
 
   @Query('ticket')

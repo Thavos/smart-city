@@ -93,7 +93,7 @@ export class UserResolver {
   @Mutation('removeUser')
   //@Roles('admin')
   remove(@Context('req') req: Request, @Args('id') id: string) {
-    if (req.cookies['UserID'] == id) return false;
+    if (req.cookies['UserID'] == id) return 'Cant remove your own account';
     else return this.userService.remove(id);
   }
 }

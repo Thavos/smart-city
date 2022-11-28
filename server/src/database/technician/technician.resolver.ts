@@ -1,3 +1,5 @@
+import { UseGuards } from '@nestjs/common';
+import { RolesGuard } from 'src/auth/roles.guard';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import {
   CreateTechnicianInput,
@@ -6,6 +8,7 @@ import {
 import { TechnicianService } from './technician.service';
 
 @Resolver('Technician')
+@UseGuards(RolesGuard)
 export class TechnicianResolver {
   constructor(private readonly technicianService: TechnicianService) {}
 

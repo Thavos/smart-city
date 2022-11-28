@@ -11,7 +11,7 @@ import { TechnicianModule } from './database/technician/technician.module';
 import { ManagerModule } from './database/manager/manager.module';
 import { TicketModule } from './database/ticket/ticket.module';
 import { CommentModule } from './database/comment/comment.module';
-import { ServicerequestModule } from './database/servicerequest/servicerequest.module';
+import { ServiceRequestModule } from './database/servicerequest/servicerequest.module';
 import { PrismaService } from './database/prisma.service';
 
 @Module({
@@ -36,7 +36,7 @@ import { PrismaService } from './database/prisma.service';
     ManagerModule,
     TicketModule,
     CommentModule,
-    ServicerequestModule,
+    ServiceRequestModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

@@ -34,7 +34,7 @@ export class UpdateManagerInput {
     userId?: Nullable<string>;
 }
 
-export class CreateServicerequestInput {
+export class CreateServiceRequestInput {
     name: string;
     desc: string;
     state: number;
@@ -44,7 +44,7 @@ export class CreateServicerequestInput {
     technicianId: string;
 }
 
-export class UpdateServicerequestInput {
+export class UpdateServiceRequestInput {
     id?: Nullable<string>;
     name?: Nullable<string>;
     desc?: Nullable<string>;
@@ -119,9 +119,9 @@ export abstract class IQuery {
 
     abstract manager(id?: Nullable<string>): Nullable<Manager> | Promise<Nullable<Manager>>;
 
-    abstract servicerequests(): Nullable<Nullable<Servicerequest>[]> | Promise<Nullable<Nullable<Servicerequest>[]>>;
+    abstract serviceRequests(): Nullable<Nullable<ServiceRequest>[]> | Promise<Nullable<Nullable<ServiceRequest>[]>>;
 
-    abstract servicerequest(id?: Nullable<string>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
+    abstract serviceRequest(id?: Nullable<string>): Nullable<ServiceRequest> | Promise<Nullable<ServiceRequest>>;
 
     abstract technicians(): Nullable<Nullable<Technician>[]> | Promise<Nullable<Nullable<Technician>[]>>;
 
@@ -153,11 +153,11 @@ export abstract class IMutation {
 
     abstract removeManager(id?: Nullable<string>): Nullable<Manager> | Promise<Nullable<Manager>>;
 
-    abstract createServicerequest(createServicerequestInput?: Nullable<CreateServicerequestInput>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
+    abstract createServiceRequest(createServiceRequestInput?: Nullable<CreateServiceRequestInput>): Nullable<ServiceRequest> | Promise<Nullable<ServiceRequest>>;
 
-    abstract updateServicerequest(updateServicerequestInput?: Nullable<UpdateServicerequestInput>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
+    abstract updateServiceRequest(updateServiceRequestInput?: Nullable<UpdateServiceRequestInput>): Nullable<ServiceRequest> | Promise<Nullable<ServiceRequest>>;
 
-    abstract removeServicerequest(id?: Nullable<string>): Nullable<Servicerequest> | Promise<Nullable<Servicerequest>>;
+    abstract removeServiceRequest(id?: Nullable<string>): Nullable<ServiceRequest> | Promise<Nullable<ServiceRequest>>;
 
     abstract createTechnician(createTechnicianInput?: Nullable<CreateTechnicianInput>): Nullable<Technician> | Promise<Nullable<Technician>>;
 
@@ -183,7 +183,7 @@ export class Manager {
     userId: string;
 }
 
-export class Servicerequest {
+export class ServiceRequest {
     id: string;
     name: string;
     desc: string;
