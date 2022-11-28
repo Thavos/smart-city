@@ -196,7 +196,7 @@ export const ServiceTicket = () => {
             <p />
             <input
               name="price"
-              type="text"
+              type="number"
               className="form-control"
               placeholder="Price"
               defaultValue=""
@@ -204,7 +204,7 @@ export const ServiceTicket = () => {
             <p />
             <input
               name="endDate"
-              type="text"
+              type="date"
               className="form-control"
               placeholder="End Date"
               defaultValue=""
