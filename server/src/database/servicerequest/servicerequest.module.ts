@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ServiceRequestService } from './ServiceRequest.service';
-import { ServiceRequestResolver } from './ServiceRequest.resolver';
+import { ServiceRequestService } from './servicerequest.service';
+import { ServiceRequestResolver } from './servicerequest.resolver';
 import { PrismaService } from '../prisma.service';
 
 @Module({
