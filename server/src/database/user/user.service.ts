@@ -129,7 +129,12 @@ export class UserService {
       take: limit || 100,
       where,
       orderBy,
-      include: { tickets: includeTickets },
+      include: {
+        tickets: includeTickets,
+        manager: true,
+        technician: true,
+        comments: true,
+      },
     });
   }
 
@@ -180,7 +185,17 @@ export class UserService {
   }
 
   async remove(id: string) {
-    const user = await this.prisma.user.findUnique({ where: { id: id } });
+    console.log(id);
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: id },
+      include: {
+        manager: true,
+        technician: true,
+        tickets: true,
+        comments: true,
+      },
+    });
 
     if (user.email === 'admin@admin.com') {
       return 'Cant remove main admin';

@@ -26,6 +26,8 @@ export class ManagerService {
   update(id: string, updateManagerInput: UpdateManagerInput) {
     return this.prisma.manager.update({
       where: { id: id },
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       data: updateManagerInput,
     });
   }

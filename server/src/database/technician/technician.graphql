@@ -1,15 +1,15 @@
 type Technician {
   id: String!
-  userId: String!
+  userId: String
   user: User
 }
 
 input CreateTechnicianInput {
-  userId: String!
+  userId: String
 }
 
 input UpdateTechnicianInput {
-  id: String
+  id: String!
   userId: String
 }
 

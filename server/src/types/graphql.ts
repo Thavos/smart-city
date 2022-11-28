@@ -26,11 +26,11 @@ export class UpdateCommentInput {
 }
 
 export class CreateManagerInput {
-    userId: string;
+    userId?: Nullable<string>;
 }
 
 export class UpdateManagerInput {
-    id?: Nullable<string>;
+    id: string;
     userId?: Nullable<string>;
 }
 
@@ -57,11 +57,11 @@ export class UpdateServiceRequestInput {
 }
 
 export class CreateTechnicianInput {
-    userId: string;
+    userId?: Nullable<string>;
 }
 
 export class UpdateTechnicianInput {
-    id?: Nullable<string>;
+    id: string;
     userId?: Nullable<string>;
 }
 
@@ -180,7 +180,8 @@ export abstract class IMutation {
 
 export class Manager {
     id: string;
-    userId: string;
+    userId?: Nullable<string>;
+    user?: Nullable<User>;
 }
 
 export class ServiceRequest {
@@ -197,7 +198,8 @@ export class ServiceRequest {
 
 export class Technician {
     id: string;
-    userId: string;
+    userId?: Nullable<string>;
+    user?: Nullable<User>;
 }
 
 export class Ticket {

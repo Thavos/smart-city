@@ -29,6 +29,8 @@ export class TechnicianService {
   update(id: string, updateTechnicianInput: UpdateTechnicianInput) {
     return this.prisma.technician.update({
       where: { id: id },
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       data: updateTechnicianInput,
     });
   }
