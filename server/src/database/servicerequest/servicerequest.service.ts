@@ -17,6 +17,12 @@ export class ServiceRequestService {
     });
   }
 
+  async findMyTickets(id: string) {
+    return await this.prisma.serviceRequest.findMany({
+      where: { technicianId: id },
+    });
+  }
+
   async findAll() {
     return await this.prisma.serviceRequest.findMany({
       include: { Technician: true },

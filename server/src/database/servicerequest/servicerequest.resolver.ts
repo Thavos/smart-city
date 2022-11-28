@@ -1,17 +1,22 @@
 import { UseGuards } from '@nestjs/common';
 import { RolesGuard } from 'src/auth/roles.guard';
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { ServiceRequestService } from './ServiceRequest.service';
 import {
   CreateServiceRequestInput,
   UpdateServiceRequestInput,
 } from 'src/types/graphql';
 import { Roles } from 'src/auth/roles.decorator';
+import { Request } from 'express';
+import { PrismaService } from '../prisma.service';
 
 @Resolver('ServiceRequest')
 @UseGuards(RolesGuard)
 export class ServiceRequestResolver {
-  constructor(private readonly ServiceRequestService: ServiceRequestService) {}
+  constructor(
+    private readonly ServiceRequestService: ServiceRequestService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   @Mutation('createServiceRequest')
   @Roles('Admin', 'Manager')
@@ -20,6 +25,21 @@ export class ServiceRequestResolver {
     createServiceRequestInput: CreateServiceRequestInput,
   ) {
     return this.ServiceRequestService.create(createServiceRequestInput);
+  }
+
+  @Query('serviceRequests')
+  @Roles('Technician')
+  async findMyTickets(@Context('req') req: Request) {
+    if (req.cookies['userID']) {
+      const user = await this.prisma.user.findFirst({
+        where: { id: req.cookies['userID'] },
+        include: { technician: true },
+      });
+
+      return this.ServiceRequestService.findMyTickets(user.technician.id);
+    }
+
+    return;
   }
 
   @Query('serviceRequests')

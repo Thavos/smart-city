@@ -119,6 +119,8 @@ export abstract class IQuery {
 
     abstract manager(id?: Nullable<string>): Nullable<Manager> | Promise<Nullable<Manager>>;
 
+    abstract findMyTickets(id?: Nullable<string>): Nullable<Nullable<ServiceRequest>[]> | Promise<Nullable<Nullable<ServiceRequest>[]>>;
+
     abstract serviceRequests(): Nullable<Nullable<ServiceRequest>[]> | Promise<Nullable<Nullable<ServiceRequest>[]>>;
 
     abstract serviceRequest(id?: Nullable<string>): Nullable<ServiceRequest> | Promise<Nullable<ServiceRequest>>;

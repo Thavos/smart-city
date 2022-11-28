@@ -1,85 +1,238 @@
-import {Button, Checkbox, Modal, TextField} from "@mui/material";
-import { useState } from "react";
+import { Button, Checkbox, Modal, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 import styles from "./myservicetickets.module.css";
 
 type ticket = {
-    id: string
-    comment:string
-    status: boolean
-    price:string
-    time: string
-}
+  id: string;
+  name: string;
+  desc: string;
+  state: boolean;
+  price: string;
+  expectedFinish: string;
+};
 
-export default function MyServiceTickets (){
-    const myTickets: ticket[] = [];
-    console.log("Fetch na získání všech ticketů právě lognutýho techniciana do proměnné myTickets");
-    //fetch
+export default function MyServiceTickets() {
+  const [myTickets, setMyTickets] = useState<any[]>();
+  useEffect(() => {
+    fetch("/api/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: `query serviceRequests {
+                    serviceRequests {
+                        id
+                        name
+                        desc
+                        state
+                        price
+                        expectedFinish
+                        Technician{
+                            userId
+                        }
+                    }
+                }`,
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+        if (data.data.serviceRequests) setMyTickets(data.data.serviceRequests);
+      });
+  }, []);
 
-    function handleCheckbox(c: ticket){
-        console.log("Fetch na změnu stavu service ticketu podle ticketu");
-        //fetch
+  function handleCheckbox(c: ticket) {
+    fetch("/api/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: `mutation updateServiceRequest($updateServiceRequestInput: UpdateServiceRequestInput) {
+                    updateServiceRequest(updateServiceRequestInput: $updateServiceRequestInput) {
+                        id
+                    }
+                }`,
+        variables: {
+          updateServiceRequestInput: {
+            id: c.id,
+            state: c.state,
+          },
+        },
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
+  function handleTimeChange(c: ticket) {
+    fetch("/api/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: `mutation updateServiceRequest($updateServiceRequestInput: UpdateServiceRequestInput) {
+                      updateServiceRequest(updateServiceRequestInput: $updateServiceRequestInput) {
+                          id
+                      }
+                  }`,
+        variables: {
+          updateServiceRequestInput: {
+            id: c.id,
+            expectedFinish: parseInt(c.expectedFinish),
+          },
+        },
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
+  function handlePriceChange(c: ticket) {
+    fetch("/api/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: `mutation updateServiceRequest($updateServiceRequestInput: UpdateServiceRequestInput) {
+                        updateServiceRequest(updateServiceRequestInput: $updateServiceRequestInput) {
+                            id
+                        }
+                    }`,
+        variables: {
+          updateServiceRequestInput: {
+            id: c.id,
+            price: c.price,
+          },
+        },
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
+  function handleModalClose() {
+    if (changed) {
+      fetch("/api/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          query: `mutation updateServiceRequest($updateServiceRequestInput: UpdateServiceRequestInput) {
+                            updateServiceRequest(updateServiceRequestInput: $updateServiceRequestInput) {
+                                id
+                            }
+                        }`,
+          variables: {
+            updateServiceRequestInput: {
+              id: ticketData.id,
+              desc: ticketData.desc,
+            },
+          },
+        }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+        });
     }
+    setChanged(false);
+    setOpenModal(false);
+  }
 
-    function handleTimeChange(c:ticket){
-        console.log("Fetch na změnu estimated času na service ticketu");
-        //fetch
-    }
+  function handleOpenModal(ticket: ticket) {
+    setTicketData(ticket);
+    setOpenModal(true);
+  }
+  function handleCommentChange() {
+    setChanged(true);
+  }
 
-    function handlePriceChange(c:ticket){
-        console.log("Fetch na změnu estimated ceny na service ticketu");
-        //fetch
-    }
+  const [changed, setChanged] = useState(false);
+  const randticket: ticket = {
+    id: "",
+    name: "",
+    desc: "",
+    state: true,
+    price: "",
+    expectedFinish: "",
+  };
+  const [openModal, setOpenModal] = useState(false);
+  const [ticketData, setTicketData] = useState(randticket);
 
-    function handleModalClose(){
-        if(changed){
-            console.log("Fetch na update komentáře k ticketu, který je uložen v proměnné ticketData");
-            //fetch
-        }
-        setChanged(false);
-        setOpenModal(false);
-    }
-
-    function handleOpenModal(ticket:ticket){
-        setTicketData(ticket);
-        setOpenModal(true);
-    }
-    function handleCommentChange(){
-        setChanged(true);
-    }
-
-    const [changed, setChanged] = useState(false);
-    const randticket:ticket = {id:"", time:"", price: "", comment:"", status:false};
-    const [openModal, setOpenModal] = useState(false);
-    const [ticketData, setTicketData] = useState(randticket);
-
-
-    return(
-        <div>
-            <nav className={styles["nav"]}>
-                <a className={styles["nav-link"]} href="/profile">
-                Profile
-                </a>
-            <div>{">"}</div>
-                <a className={styles["nav-link"]} href="/ticketsPage">
-                Tickets
-                </a>
-            </nav>
-            <div className={styles["flex-wrapper"]}>
-                {myTickets.map(c => {
-                    return(
-                        <div>
-                            <div>{c.id}</div>
-                            <div> <TextField onBlur={() => handlePriceChange(c)} value={c.price} /></div>
-                            <div> <TextField onBlur={() => handleTimeChange(c)} value={c.time} /> </div>
-                            <div><Checkbox checked={c.status} onChange={() => handleCheckbox(c)} /></div>
-                            <div> <Button onClick={() => handleOpenModal(c)}>Comment</Button></div>
-                        </div>
-                    )
-                })}
-            </div>
-            <Modal open={openModal} onClose={() => {handleModalClose()}} >
-                <TextField onChange={()=> {handleCommentChange()}} value={ticketData.comment}/>
-            </Modal>
-        </div>
-    )
+  return (
+    <div>
+      <nav className={styles["nav"]}>
+        <a className={styles["nav-link"]} href="/profile">
+          Profile
+        </a>
+        <div>{">"}</div>
+        <a className={styles["nav-link"]} href="/ticketsPage">
+          Tickets
+        </a>
+      </nav>
+      <div className={styles["flex-wrapper"]}>
+        {myTickets &&
+          myTickets.map((c) => {
+            return (
+              <div>
+                <div>{c.id}</div>
+                <div>
+                  {" "}
+                  <TextField
+                    onBlur={() => handlePriceChange(c)}
+                    value={c.price}
+                  />
+                </div>
+                <div>
+                  {" "}
+                  <TextField
+                    onBlur={() => handleTimeChange(c)}
+                    value={c.time}
+                  />{" "}
+                </div>
+                <div>
+                  <Checkbox
+                    checked={c.status}
+                    onChange={() => handleCheckbox(c)}
+                  />
+                </div>
+                <div>
+                  {" "}
+                  <Button onClick={() => handleOpenModal(c)}>Comment</Button>
+                </div>
+              </div>
+            );
+          })}
+      </div>
+      <Modal
+        open={openModal}
+        onClose={(e) => {
+          handleModalClose();
+        }}
+      >
+        <TextField
+          onChange={() => {
+            handleCommentChange();
+          }}
+          value={ticketData.desc}
+        />
+      </Modal>
+    </div>
+  );
 }

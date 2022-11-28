@@ -34,6 +34,7 @@ input UpdateServiceRequestInput {
 }
 
 type Query {
+  findMyTickets(id: String): [ServiceRequest]
   serviceRequests: [ServiceRequest]
   serviceRequest(id: String): ServiceRequest
 }
