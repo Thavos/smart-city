@@ -113,10 +113,10 @@ export const ServiceTicket = () => {
         <table>
           <thead>
             <tr><th>Ticket Name</th>
-            <th>Description</th>
-            <th>Technician</th>
-            <th>Est. Price (CZK)</th>
-            <th>Est. End Date</th></tr>
+              <th>Description</th>
+              <th>Technician</th>
+              <th>Est. Price (CZK)</th>
+              <th>Est. End Date</th></tr>
           </thead>
           {servTickets &&
             servTickets.map((item: any) => {
@@ -158,11 +158,28 @@ export const ServiceTicket = () => {
               placeholder="Name"
               defaultValue=""
             />
+            <p />
             <input
               name="description"
               type="text"
               className="form-control"
               placeholder="Description"
+              defaultValue=""
+            />
+            <p />
+            <input
+              name="price"
+              type="text"
+              className="form-control"
+              placeholder="Price"
+              defaultValue=""
+            />
+            <p />
+            <input
+              name="endDate"
+              type="text"
+              className="form-control"
+              placeholder="End Date"
               defaultValue=""
             />
             <p />
