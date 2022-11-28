@@ -77,6 +77,8 @@ export class UserService {
 
     if (ticket) {
       await this.prisma.ticket.create({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore TODO:
         data: {
           ...ticket,
           userId: user.id,

@@ -48,6 +48,7 @@ export class TicketResolver {
   }
 
   @Query('ticket')
+  @Roles('Admin', 'Manager')
   findOne(@Args('id') id: string) {
     return this.ticketService.findOne(id);
   }

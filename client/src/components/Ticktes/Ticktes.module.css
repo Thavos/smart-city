@@ -115,9 +115,9 @@ p {
   width: 28rem;
   word-wrap: break-word;
   margin: 0.5rem;
+}
 
-
-.footer-wrapper{
+.footer-wrapper {
   background-color: #08d;
 
   position: absolute;
@@ -128,7 +128,7 @@ p {
   justify-content: space-between;
 }
 
-.footer-wrapper div{
+.footer-wrapper div {
   margin-left: 10rem;
   margin-right: 10rem;
   padding-top: 1.2rem;

@@ -11,6 +11,8 @@ export class TechnicianService {
 
   create(createTechnicianInput: CreateTechnicianInput) {
     return this.prisma.technician.create({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore TODO:
       data: createTechnicianInput,
     });
   }

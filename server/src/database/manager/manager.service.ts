@@ -8,6 +8,8 @@ export class ManagerService {
 
   create(createManagerInput: CreateManagerInput) {
     return this.prisma.manager.create({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore TODO:
       data: createManagerInput,
     });
   }
