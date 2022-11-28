@@ -11,6 +11,15 @@ type TicketType = {
   userId: number;
 };
 
+enum status {
+  "Waiting" = 0,
+  "Assigned" = 1,
+  "Resolved"= 2,
+  "Declined" = 3,
+}
+
+const TicketStatus = ["Waiting", "Assigned", "Resolved", "Declined"];
+
 export const Ticktes: FC = () => {
   const [tickets, setTickets] = useState<[TicketType]>();
 
@@ -58,7 +67,7 @@ export const Ticktes: FC = () => {
                     day: "2-digit",
                   }).format(parseInt(c.createdAt))}
                 </div>
-                <div className={styles["ticket-state"]}>{c.state}</div>
+                <div className={styles["ticket-state"]}>{TicketStatus[c.state]}</div>
                 <div className={styles["ticket-dsc"]}>
                   <p>{c.desc}</p>
                 </div>
