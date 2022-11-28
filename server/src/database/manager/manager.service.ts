@@ -13,7 +13,7 @@ export class ManagerService {
   }
 
   findAll() {
-    return this.prisma.manager.findMany();
+    return this.prisma.technician.findMany({ include: { user: true } });
   }
 
   findOne(id: string) {
