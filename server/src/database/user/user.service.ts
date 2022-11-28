@@ -190,16 +190,8 @@ export class UserService {
   }
 
   async remove(id: string) {
-    console.log(id);
-
     const user = await this.prisma.user.findUnique({
       where: { id: id },
-      include: {
-        manager: true,
-        technician: true,
-        tickets: true,
-        comments: true,
-      },
     });
 
     if (user.email === 'admin@admin.com') {
