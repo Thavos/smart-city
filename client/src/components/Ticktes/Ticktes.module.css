@@ -1,10 +1,12 @@
 html {
   color: white;
+  font-family: sans-serif;
 }
 
-body {
+.body {
   position: relative;
   min-height: 100vh;
+  padding-bottom: 10rem;
 }
 
 p {
@@ -102,29 +104,19 @@ p {
   margin: 0.5rem;
 }
 
-.footer-wrapper {
-  /* padding-bottom: 2.5rem;
-  padding-top: 1rem;
-  margin-top: 2rem; */
-  height: 5rem;
-  margin-top: 2rem;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
+.footer-wrapper{
   background-color: #08d;
-}
-
-/* .footer-wrapper div {
   position: absolute;
   bottom: 0;
-  text-align: right;
   width: 100%;
-  height: 2.5rem;
-  background-color: #08d;
-} */
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+}
 
-.footer-wrapper div {
-  background-color: #08d;
-  margin: auto;
+.footer-wrapper div{
+  margin-left: 10rem;
+  margin-right: 10rem;
+  padding-top: 1.2rem;
   font-weight: bold;
 }

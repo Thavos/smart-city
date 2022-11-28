@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context, ID } from '@nestjs/graphql';
 import { Request } from 'express';
 import { CreateTicketInput, UpdateTicketInput } from 'src/types/graphql';
 import { TicketService } from './ticket.service';
@@ -16,7 +16,7 @@ export class TicketResolver {
 
     const data = createTicketInput;
 
-    //data.userInput.id = id;
+    data.userId = id;
 
     return this.ticketService.create(data);
   }
