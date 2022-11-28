@@ -2,6 +2,7 @@ import { MenuBar } from "../../components/MenuBar";
 import { Box, Button, Checkbox, Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import styles from "./ServiceTicket.module.css";
+import { convertToObject } from "typescript";
 
 export const ServiceTicket = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +18,7 @@ export const ServiceTicket = () => {
     p: 4,
   };
 
-  let technicians: any[] = [];
+  const [technicians, setTechnicians] = useState<any>();
   useEffect(() => {
     fetch("/api/graphql", {
       method: "POST",
@@ -27,8 +28,8 @@ export const ServiceTicket = () => {
       },
       body: JSON.stringify({
         query: `query technicians {
-                        technicians {
-                            id
+                    technicians {
+                        id
                         user{
                             id
                             name
@@ -42,10 +43,9 @@ export const ServiceTicket = () => {
     })
       .then((r) => r.json())
       .then((data) => {
-        technicians = data.data.technicians;
-        console.log(technicians);
+        if (data.data.technicians) setTechnicians(data.data.technicians);
       });
-  }, []);
+  }, [setTechnicians]);
 
   function handleShowModal() {
     setShowModal(true);
@@ -112,13 +112,18 @@ export const ServiceTicket = () => {
       <div style={{ color: "white" }}>
         <table>
           {servTickets &&
-            servTickets.map((item) => {
+            servTickets.map((item: any) => {
+              if (technicians)
+                technicians.forEach((tech: any) => {
+                  if (tech.user.id === item.Technician.userId)
+                    item.email = tech.user.email;
+                });
               return (
                 <tr>
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.desc}</td>
-                  <td>{item.Technician.userId}</td>
+                  <td>{item.email}</td>
                   <td>{item.price}</td>
                   <td>{item.expectedFinish}</td>
                   <td>
@@ -152,9 +157,10 @@ export const ServiceTicket = () => {
             />
             <p />
             <select id="technician">
-              {technicians.map((item) => {
-                return <option value={item.email}>{item.email}</option>;
-              })}
+              {technicians &&
+                technicians.map((item: any) => {
+                  return <option value={item.email}>{item.email}</option>;
+                })}
             </select>
             <p />
             <Button type="submit">Create</Button>
