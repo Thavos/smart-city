@@ -181,6 +181,7 @@ export abstract class IMutation {
 export class Manager {
     id: string;
     userId: string;
+    user?: Nullable<User>;
 }
 
 export class Servicerequest {
@@ -198,6 +199,7 @@ export class Servicerequest {
 export class Technician {
     id: string;
     userId: string;
+    user?: Nullable<User>;
 }
 
 export class Ticket {

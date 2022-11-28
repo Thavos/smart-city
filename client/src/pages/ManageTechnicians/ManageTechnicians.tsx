@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react";
-import ManageUsersTable from "../../components/ManageUsersTable/ManageUsersTable";
+import ManageTechniciansTable from "../../components/ManageTechniciansTable/ManageTechniciansTable";
 import { MenuBar } from "../../components/MenuBar";
 
 export const ManageTechnicians: FC = () => {
   return (
     <div>
       <MenuBar name="" surn="" />
-      <ManageUsersTable />
+      <ManageTechniciansTable />
     </div>
   );
 };
