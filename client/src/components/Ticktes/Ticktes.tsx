@@ -42,13 +42,9 @@ export const Ticktes: FC = () => {
 
   return (
     <div>
-      <NewTicket />
-      {/* <div className={ styles["head-parent"] }>
-        <p className={ styles["head-child"] }>Ticket Label</p>
-        <p className={ styles["head-child"] }>Date</p>
-        <p className={ styles["head-child"] }>State</p>
-        <p className={ styles["head-child"] }>User</p>
-      </div> */}
+      <div className={ styles["new-tickets"] }>
+        <NewTicket />
+      </div>
       <div className={styles["all-tickets"]}>
         {tickets &&
           tickets.map((c) => {
@@ -71,7 +67,8 @@ export const Ticktes: FC = () => {
           })}
       </div>
       <div className={styles["footer-wrapper"]}>
-        <footer>School project</footer>
+        <div>School project</div>
+        <div>Smart City</div>
       </div>
     </div>
   );
