@@ -195,7 +195,7 @@ export const ServiceTicket = () => {
             <p />
             <input
               name="price"
-              type="text"
+              type="number"
               className="form-control"
               placeholder="Price"
               defaultValue=""
@@ -203,7 +203,7 @@ export const ServiceTicket = () => {
             <p />
             <input
               name="endDate"
-              type="text"
+              type="date"
               className="form-control"
               placeholder="End Date"
               defaultValue=""
@@ -212,7 +212,7 @@ export const ServiceTicket = () => {
             <select id="technician">
               {technicians &&
                 technicians.map((item: any) => {
-                  return <option value={item.email}>{item.email}</option>;
+                  return <option value={item.user.email}>{item.user.email}</option>;
                 })}
             </select>
             <p />
