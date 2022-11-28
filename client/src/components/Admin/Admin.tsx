@@ -5,13 +5,17 @@ import classnames from "classnames";
 export const Admin: FC = () => {
   return (
     <>
-      <p>Admin menu</p>
-      <a className={classnames(styles["btn"])} href="/manageusers">
-        Manage Users
-      </a>
-      <p>Tickets</p>
-      <p>Service tickets</p>
-      <p>Users</p>
+      <nav className={styles["nav"]}>
+        <a className={styles["nav-link"]} href="/ticketsPage">
+          Tickets
+        </a>
+        <a className={styles["nav-link"]} href="/serviceticket">
+          Service Tickets
+        </a>
+        <a className={styles["nav-link"]} href="/manageusers">
+          Manage Users
+        </a>
+      </nav>
     </>
   );
 };
