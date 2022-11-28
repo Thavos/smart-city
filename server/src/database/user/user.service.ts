@@ -136,9 +136,9 @@ export class UserService {
       orderBy,
       include: {
         tickets: includeTickets,
-        manager: includeManager,
-        technician: includeTechnician,
-        comments: includeComments,
+        //manager: includeManager,
+        //technician: includeTechnician,
+        //comments: includeComments,
       },
     });
   }
