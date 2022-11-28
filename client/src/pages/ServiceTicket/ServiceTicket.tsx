@@ -109,8 +109,15 @@ export const ServiceTicket = () => {
         </a>
       </nav>
       <Button onClick={handleShowModal}>Create new service ticket</Button>
-      <div style={{ color: "white" }}>
+      <div className={styles["table-wrapper"]}>
         <table>
+          <thead>
+            <tr><th>Ticket Name</th>
+            <th>Description</th>
+            <th>Technician</th>
+            <th>Est. Price (CZK)</th>
+            <th>Est. End Date</th></tr>
+          </thead>
           {servTickets &&
             servTickets.map((item: any) => {
               if (technicians)
@@ -120,12 +127,15 @@ export const ServiceTicket = () => {
                 });
               return (
                 <tr>
-                  <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.desc}</td>
                   <td>{item.email}</td>
                   <td>{item.price}</td>
-                  <td>{item.expectedFinish}</td>
+                  <td>{new Intl.DateTimeFormat("cs-CZ", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  }).format(parseInt(item.expectedFinish))}</td>
                   <td>
                     <Checkbox
                       checked={item.state}
