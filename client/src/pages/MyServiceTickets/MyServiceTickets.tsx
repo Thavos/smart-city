@@ -1,5 +1,6 @@
 import {Button, Checkbox, Modal, TextField} from "@mui/material";
 import { useState } from "react";
+import styles from "./myservicetickets.module.css";
 
 type ticket = {
     id: string
@@ -54,6 +55,15 @@ export default function MyServiceTickets (){
 
     return(
         <div>
+            <nav className={styles["nav"]}>
+                <a className={styles["nav-link"]} href="/profile">
+                Profile
+                </a>
+            <div>{">"}</div>
+                <a className={styles["nav-link"]} href="/ticketsPage">
+                Tickets
+                </a>
+            </nav>
             <table>
                 <tr>
                     <td>Id</td>

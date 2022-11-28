@@ -8,13 +8,9 @@ export const Manager: FC = () => {
       <a className={styles["nav-link"]} href="/ticketsPage">
         Tickets
       </a>
-      <a className={styles["nav-link"]}>My Tickets</a>
-
       <a className={styles["nav-link"]} href="/serviceticket">
         Service Tickets
       </a>
-      <a className={styles["nav-link"]}>My Service Tickets</a>
-
       <a className={styles["nav-link"]} href="/managetechnicians">
         Manage Technicians
       </a>
