@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   name: string;
   surn: string;
+  role?: string;
 }
 
-export const MenuBar: FC<Props> = ({ name, surn }) => {
+export const MenuBar: FC<Props> = ({ name, surn, role }) => {
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -26,7 +27,7 @@ export const MenuBar: FC<Props> = ({ name, surn }) => {
   return (
     <div className={styles["menu-bar"]}>
       <div className={styles["user"]}>
-        {name} {surn}
+        {name} {surn} {role && <>-</>} {role}
       </div>
       <nav className={styles["nav"]}>
         <a className={classnames(styles["btn"])} href="/profile">

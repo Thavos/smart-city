@@ -129,7 +129,12 @@ export class UserService {
       take: limit || 100,
       where,
       orderBy,
-      include: { tickets: includeTickets },
+      include: {
+        tickets: includeTickets,
+        manager: true,
+        technician: true,
+        comments: true,
+      },
     });
   }
 
@@ -140,16 +145,62 @@ export class UserService {
     });
   }
 
-  update(id: string, updateUserInput: UpdateUserInput) {
+  async update(id: string, updateUserInput: UpdateUserInput) {
+    const user = await this.prisma.user.findUnique({ where: { id: id } });
+
+    if (user.email == 'admin@admin.com') {
+      return 'Cant change main admin data';
+    }
+
+    // Change technician into some other role so we have to delete its ref to technician table
+    if (user.authId == 1 && updateUserInput.authId != 1) {
+      await this.prisma.technician.update({
+        where: { userId: user.id },
+        data: { userId: 'FormerTechnician' },
+      });
+    }
+
+    // Change manager into some other role so we have to delete its ref to technician table
+    else if (user.authId == 2 && updateUserInput.authId != 2) {
+      await this.prisma.manager.update({
+        where: { userId: user.id },
+        data: { userId: 'FormerManager' },
+      });
+    }
+
+    // Change user into technician so new technician acc is needed
+    if (updateUserInput.authId == 1) {
+      await this.prisma.technician.create({ data: { userId: user.id } });
+    }
+
+    // Change user into manager so new technician acc is needed
+    else if (updateUserInput.authId == 2) {
+      await this.prisma.manager.create({ data: { userId: user.id } });
+    }
+
     return this.prisma.user.update({
       where: { id: id },
       data: updateUserInput,
-      select: { id: true, authId: true },
     });
   }
 
-  remove(id: string) {
+  async remove(id: string) {
     console.log(id);
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: id },
+      include: {
+        manager: true,
+        technician: true,
+        tickets: true,
+        comments: true,
+      },
+    });
+
+    if (user.email === 'admin@admin.com') {
+      return 'Cant remove main admin';
+    }
+
     return this.prisma.user.delete({
       where: { id: id },
       select: { id: true },

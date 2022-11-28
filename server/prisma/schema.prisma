@@ -39,16 +39,16 @@ model User {
 
 model Technician {
   id     String @id @unique @default(cuid())
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: SetDefault)
+  userId String @unique @default("FormerUser")
 
   ServiceRequest ServiceRequest[]
 }
 
 model Manager {
   id     String @id @unique @default(cuid())
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: SetDefault)
+  userId String @unique @default("FormerUser")
 
   ServiceRequest ServiceRequest[]
 }
@@ -81,10 +81,10 @@ model ServiceRequest {
 
   comments Comment[]
 
-  Technician   Technician? @relation(fields: [technicianId], references: [id], onDelete: Cascade)
+  Technician   Technician? @relation(fields: [technicianId], references: [id], onDelete: SetDefault)
   technicianId String?     @default("FormerTechnician")
 
-  Manager   Manager? @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  Manager   Manager? @relation(fields: [managerId], references: [id], onDelete: SetDefault)
   managerId String?  @default("FormerTechnician")
 }
 

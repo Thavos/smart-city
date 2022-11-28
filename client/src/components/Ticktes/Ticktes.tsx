@@ -50,6 +50,7 @@ export const Ticktes: FC = () => {
   }, [setTickets]);
 
   return (
+
     <div className={ styles["body"]}>
       <div className={ styles["new-tickets"] }>
         <NewTicket />
@@ -75,6 +76,7 @@ export const Ticktes: FC = () => {
             );
           })}
       </div>
+
       <footer className={styles["footer-wrapper"]}>
         <div>School project</div>
         <div>Smart City</div>

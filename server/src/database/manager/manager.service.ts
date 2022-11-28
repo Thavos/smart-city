@@ -13,7 +13,7 @@ export class ManagerService {
   }
 
   findAll() {
-    return this.prisma.technician.findMany({ include: { user: true } });
+    return this.prisma.manager.findMany({ include: { user: true } });
   }
 
   findOne(id: string) {
@@ -26,6 +26,8 @@ export class ManagerService {
   update(id: string, updateManagerInput: UpdateManagerInput) {
     return this.prisma.manager.update({
       where: { id: id },
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       data: updateManagerInput,
     });
   }

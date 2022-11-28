@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ServicerequestService } from './servicerequest.service';
-import { ServicerequestResolver } from './servicerequest.resolver';
+import { ServiceRequestService } from './ServiceRequest.service';
+import { ServiceRequestResolver } from './ServiceRequest.resolver';
 import { PrismaService } from '../prisma.service';
 
 @Module({
-  providers: [ServicerequestResolver, ServicerequestService, PrismaService],
+  providers: [ServiceRequestResolver, ServiceRequestService, PrismaService],
 })
-export class ServicerequestModule {}
+export class ServiceRequestModule {}

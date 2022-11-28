@@ -68,11 +68,13 @@ export const Profile: FC = () => {
     <>
       {user && (
         <>
-          <MenuBar name={user.name} surn={user.surn} />
+          <MenuBar
+            name={user.name}
+            surn={user.surn}
+            role={auhtority[user.authId]}
+          />
 
           {setC()}
-
-          <Ticktes />
         </>
       )}
       {!user && (

@@ -22,6 +22,19 @@ p {
   width: 20rem;
 }
 
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.new-tickets {
+  display: block;
+  margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20rem;
+}
+
 .all-tickets {
   display: flex;
   width: 90%;
@@ -102,10 +115,11 @@ p {
   width: 28rem;
   word-wrap: break-word;
   margin: 0.5rem;
-}
+
 
 .footer-wrapper{
   background-color: #08d;
+
   position: absolute;
   bottom: 0;
   width: 100%;

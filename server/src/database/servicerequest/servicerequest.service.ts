@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import {
-  CreateServicerequestInput,
-  UpdateServicerequestInput,
+  CreateServiceRequestInput,
+  UpdateServiceRequestInput,
 } from 'src/types/graphql';
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
-export class ServicerequestService {
+export class ServiceRequestService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createServicerequestInput: CreateServicerequestInput) {
+  create(createServiceRequestInput: CreateServiceRequestInput) {
     return this.prisma.serviceRequest.create({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore TODO:
-      data: createServicerequestInput,
+      data: createServiceRequestInput,
     });
   }
 
@@ -28,10 +28,10 @@ export class ServicerequestService {
     });
   }
 
-  update(id: string, updateServicerequestInput: UpdateServicerequestInput) {
+  update(id: string, updateServiceRequestInput: UpdateServiceRequestInput) {
     return this.prisma.serviceRequest.update({
       where: { id: id },
-      data: updateServicerequestInput,
+      data: updateServiceRequestInput,
     });
   }
 

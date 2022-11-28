@@ -1,4 +1,6 @@
 import { UseGuards } from '@nestjs/common';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
 import {
   Resolver,
   Query,
@@ -8,8 +10,6 @@ import {
   Info,
 } from '@nestjs/graphql';
 import { Request } from 'express';
-import { Roles } from 'src/auth/roles.decorator';
-import { RolesGuard } from 'src/auth/roles.guard';
 import {
   CreateUserInput,
   LoginUserInput,
@@ -53,7 +53,7 @@ export class UserResolver {
   }
 
   @Query('users')
-  //@Roles('admin')
+  @Roles('Admin', 'Manager')
   findAll(
     @Args('limit') limit: number | null,
     @Args('name') name: string | null,
@@ -79,21 +79,21 @@ export class UserResolver {
   }
 
   @Query('user')
-  //@Roles('admin')
+  @Roles('admin', 'manager')
   findOne(@Args('id') id: string) {
     return this.userService.findOne(id);
   }
 
   @Mutation('updateUser')
-  //@Roles('admin')
+  @Roles('admin', 'manager')
   update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.userService.update(updateUserInput.id, updateUserInput);
   }
 
   @Mutation('removeUser')
-  //@Roles('admin')
+  @Roles('admin')
   remove(@Context('req') req: Request, @Args('id') id: string) {
-    if (req.cookies['UserID'] == id) return false;
+    if (req.cookies['UserID'] == id) return 'Cant remove your own account';
     else return this.userService.remove(id);
   }
 }
