@@ -61,8 +61,30 @@ export const ServiceTicket = () => {
   }
 
   function handleCheckbox(ticket: any) {
-    console.log("Fetch na update stavu ticketu");
-    console.log(ticket);
+    fetch("/api/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: `mutation updateServiceRequest($updateServiceRequestInput: UpdateServiceRequestInput) {
+                    updateServiceRequest(updateServiceRequestInput: $updateServiceRequestInput) {
+                        id
+                    }
+                }`,
+        variables: {
+          updateServiceRequestInput: {
+            id: ticket.id,
+            state: ticket.state,
+          },
+        },
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+      });
   }
 
   const [servTickets, setServTickets] = useState<any[]>();
@@ -112,11 +134,13 @@ export const ServiceTicket = () => {
       <div className={styles["table-wrapper"]}>
         <table>
           <thead>
-            <tr><th>Ticket Name</th>
+            <tr>
+              <th>Ticket Name</th>
               <th>Description</th>
               <th>Technician</th>
               <th>Est. Price (CZK)</th>
-              <th>Est. End Date</th></tr>
+              <th>Est. End Date</th>
+            </tr>
           </thead>
           {servTickets &&
             servTickets.map((item: any) => {
@@ -131,11 +155,13 @@ export const ServiceTicket = () => {
                   <td>{item.desc}</td>
                   <td>{item.email}</td>
                   <td>{item.price}</td>
-                  <td>{new Intl.DateTimeFormat("cs-CZ", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  }).format(parseInt(item.expectedFinish))}</td>
+                  <td>
+                    {new Intl.DateTimeFormat("cs-CZ", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    }).format(parseInt(item.expectedFinish))}
+                  </td>
                   <td>
                     <Checkbox
                       checked={item.state}
@@ -199,11 +225,29 @@ export const ServiceTicket = () => {
 };
 
 function NewServiceTicket(name: String, desc: String, tech: String) {
-  console.log(
-    "Fetch na vytvoření novýho service ticketu s descriptionem desc a zadaným technikem tech"
-  );
-  console.log(name);
-  console.log(desc);
-  console.log(tech);
-  //fetch
+  fetch("/api/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query: `mutation updateServiceRequest($createServiceRequestInput: CreateServiceRequestInput) {
+                          updateServiceRequest(createServiceRequestInput: $createServiceRequestInput) {
+                              id
+                          }
+                      }`,
+      variables: {
+        createServiceRequestInput: {
+          name: name,
+          desc: desc,
+          technicianId: tech,
+        },
+      },
+    }),
+  })
+    .then((r) => r.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
