@@ -198,7 +198,7 @@ export class ServiceRequest {
 
 export class Technician {
     id: string;
-    userId?: Nullable<string>;
+    userId: string;
     user?: Nullable<User>;
 }
 

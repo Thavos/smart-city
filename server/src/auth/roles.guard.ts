@@ -1,44 +1,39 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { GqlExecutionContext } from '@nestjs/graphql';
 import { PrismaService } from 'src/database/prisma.service';
 
 export interface AuthType {
   role: 'Citizen' | 'Technician' | 'Manager' | 'Admin';
 }
 
-enum AuthIdRole {
-  'Citizen',
-  'Technician',
-  'Manager',
-  'Admin',
-}
+const Roles = ['Citizen', 'Technician', 'Manager', 'Admin'];
 
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector, private prisma: PrismaService) {}
 
-  canActivate(context: ExecutionContext): boolean {
-    return true;
-
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const roles = this.reflector.get<AuthType[]>('roles', context.getHandler());
     if (!roles) {
       return true;
     }
-    const request = context.switchToHttp().getRequest();
-    const user = request.cookies['UserID'];
+
+    const ctx = GqlExecutionContext.create(context);
+    const req = ctx.getContext().req;
+
+    const user = req.cookies['userID'];
     let auth: any;
 
-    console.log(request.cookies);
-
     if (user) {
-      auth = this.prisma.user.findUnique({
+      auth = await this.prisma.user.findUnique({
         where: { id: user },
         select: { authId: true },
       });
 
-      auth = AuthIdRole[auth];
+      auth = Roles[auth.authId];
     }
 
-    return !!roles.find(auth);
+    return !!roles.includes(auth);
   }
 }
