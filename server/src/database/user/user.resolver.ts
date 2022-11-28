@@ -65,6 +65,9 @@ export class UserResolver {
     @Context('req') body: Request,
   ) {
     const includeTickets = body.body.query.indexOf('tickets {') > -1;
+    const includeManager = body.body.query.indexOf('manager {') > -1;
+    const includeTechnician = body.body.query.indexOf('technician {') > -1;
+    const includeComments = body.body.query.indexOf('comments {') > -1;
 
     return this.userService.findAll(
       limit,
@@ -75,6 +78,9 @@ export class UserResolver {
       sort,
       sortDir,
       includeTickets,
+      includeManager,
+      includeTechnician,
+      includeComments,
     );
   }
 
