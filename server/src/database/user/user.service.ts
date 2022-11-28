@@ -103,6 +103,9 @@ export class UserService {
     sort: 'name' | 'surn' | 'email' | 'authId' | null,
     sortDir: 'asc' | 'desc' | null,
     includeTickets: boolean,
+    includeManager: boolean,
+    includeTechnician: boolean,
+    includeComments: boolean,
   ) {
     const where: Record<string, any> = {};
     const orderBy: Record<string, string>[] = [];
@@ -133,11 +136,9 @@ export class UserService {
       orderBy,
       include: {
         tickets: includeTickets,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        manager: true,
-        technician: true,
-        comments: true,
+        manager: includeManager,
+        technician: includeTechnician,
+        comments: includeComments,
       },
     });
   }
