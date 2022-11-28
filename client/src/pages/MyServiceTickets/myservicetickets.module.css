@@ -16,3 +16,7 @@
     margin-right: 0.6rem;
   }
   
+  .flex-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+  }

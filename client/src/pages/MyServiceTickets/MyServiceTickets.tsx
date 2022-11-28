@@ -64,26 +64,19 @@ export default function MyServiceTickets (){
                 Tickets
                 </a>
             </nav>
-            <table>
-                <tr>
-                    <td>Id</td>
-                    <td>Price</td>
-                    <td>Time</td>
-                    <td>Status</td>
-                    <td>Action</td>
-                </tr>
+            <div className={styles["flex-wrapper"]}>
                 {myTickets.map(c => {
                     return(
-                        <tr>
-                            <td>{c.id}</td>
-                            <td> <TextField onBlur={() => handlePriceChange(c)} value={c.price} /></td>
-                            <td> <TextField onBlur={() => handleTimeChange(c)} value={c.time} /> </td>
-                            <td><Checkbox checked={c.status} onChange={() => handleCheckbox(c)} /></td>
-                            <td> <Button onClick={() => handleOpenModal(c)}>Comment</Button></td>
-                        </tr>
+                        <div>
+                            <div>{c.id}</div>
+                            <div> <TextField onBlur={() => handlePriceChange(c)} value={c.price} /></div>
+                            <div> <TextField onBlur={() => handleTimeChange(c)} value={c.time} /> </div>
+                            <div><Checkbox checked={c.status} onChange={() => handleCheckbox(c)} /></div>
+                            <div> <Button onClick={() => handleOpenModal(c)}>Comment</Button></div>
+                        </div>
                     )
                 })}
-            </table>
+            </div>
             <Modal open={openModal} onClose={() => {handleModalClose()}} >
                 <TextField onChange={()=> {handleCommentChange()}} value={ticketData.comment}/>
             </Modal>

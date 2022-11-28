@@ -54,7 +54,7 @@ export const ServiceTicket = () => {
 
     function handleNewServiceticket(event: React.ChangeEvent<HTMLFormElement>) {
         event.preventDefault();
-        NewServiceTicket(event.target.name.value, event.target.description.value, event.target.technician.value);
+        NewServiceTicket(event.target.name, event.target.description.value, event.target.technician.value);
     }
 
     function handleCheckbox(ticket: any) {
