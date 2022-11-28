@@ -66,7 +66,6 @@ export const ServiceTicket = () => {
   }
 
   const [servTickets, setServTickets] = useState<any[]>();
-
   useEffect(() => {
     fetch("/api/graphql", {
       method: "POST",
@@ -77,9 +76,12 @@ export const ServiceTicket = () => {
       body: JSON.stringify({
         query: `query serviceRequests {
                     serviceRequests {
+                        id
                         name
                         desc
                         state
+                        price
+                        expectedFinish
                         Technician{
                             userId
                         }
@@ -114,6 +116,8 @@ export const ServiceTicket = () => {
               return (
                 <tr>
                   <td>{item.id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.desc}</td>
                   <td>{item.Technician.userId}</td>
                   <td>{item.price}</td>
                   <td>{item.expectedFinish}</td>
