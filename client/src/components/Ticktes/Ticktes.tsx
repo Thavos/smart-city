@@ -11,6 +11,15 @@ type TicketType = {
   userId: number;
 };
 
+enum status {
+  "Waiting" = 0,
+  "Assigned" = 1,
+  "Resolved"= 2,
+  "Declined" = 3,
+}
+
+const TicketStatus = ["Waiting", "Assigned", "Resolved", "Declined"];
+
 export const Ticktes: FC = () => {
   const [tickets, setTickets] = useState<[TicketType]>();
 
@@ -41,7 +50,8 @@ export const Ticktes: FC = () => {
   }, [setTickets]);
 
   return (
-    <div>
+
+    <div className={ styles["body"]}>
       <div className={ styles["new-tickets"] }>
         <NewTicket />
       </div>
@@ -58,7 +68,7 @@ export const Ticktes: FC = () => {
                     day: "2-digit",
                   }).format(parseInt(c.createdAt))}
                 </div>
-                <div className={styles["ticket-state"]}>{c.state}</div>
+                <div className={styles["ticket-state"]}>{TicketStatus[c.state]}</div>
                 <div className={styles["ticket-dsc"]}>
                   <p>{c.desc}</p>
                 </div>
@@ -66,10 +76,11 @@ export const Ticktes: FC = () => {
             );
           })}
       </div>
-      <div className={styles["footer-wrapper"]}>
+
+      <footer className={styles["footer-wrapper"]}>
         <div>School project</div>
         <div>Smart City</div>
-      </div>
+      </footer>
     </div>
   );
 };

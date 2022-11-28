@@ -46,7 +46,7 @@ export const NewTicket: FC = () => {
           }}
           required
         />
-        <div className={styles["cut"]}></div>
+        <div className={styles["cut-name"]}></div>
         <label htmlFor="label" className={styles["placeholder"]}>
           Ticket Name
         </label>
@@ -63,7 +63,7 @@ export const NewTicket: FC = () => {
           }}
           required
         />
-        <div className={styles["cut"]}></div>
+        <div className={styles["cut-desc"]}></div>
         <label htmlFor="desc" className={styles["placeholder"]}>
           Description
         </label>

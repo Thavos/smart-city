@@ -24,7 +24,9 @@ type UserType = {
   };
 };
 
+
 export default function ManageTechniciansTable() {
+
   const [result, setResult] = useState<any>();
 
   useEffect(() => {
