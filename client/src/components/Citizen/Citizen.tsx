@@ -1,12 +1,15 @@
 import { FC } from "react";
 import styles from "./Citizen.module.css";
-import {Admin} from "../Admin";
+import { Admin } from "../Admin";
 import classnames from "classnames";
 
 export const Citizen: FC = () => {
   return (
-      <div className="tex">
-        <p>Citizen</p>
-      </div>
+    <nav className={styles["nav"]}>
+      <a className={styles["nav-link"]} href="/ticketsPage">
+        Tickets
+      </a>
+      <a className={styles["nav-link"]}>My Tickets</a>
+    </nav>
   );
 };

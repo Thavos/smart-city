@@ -44,6 +44,7 @@ export default function ManageUsersTable() {
     })
       .then((r) => r.json())
       .then((data) => {
+        console.log(data);
         setResult(data.data.users);
       });
   }, []);

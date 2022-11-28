@@ -7,9 +7,10 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile/Profile";
 import { Register } from "./pages/Register";
-import {ManageUsers} from "./pages/ManageUsers/ManageUsers";
-import {ServiceTicket} from "./pages/ServiceTicket";
-import {ManageTechnicians} from "./pages/ManageTechnicians";
+import { ManageUsers } from "./pages/ManageUsers/ManageUsers";
+import { ServiceTicket } from "./pages/ServiceTicket";
+import { ManageTechnicians } from "./pages/ManageTechnicians";
+import { TicketsPage } from "./pages/TicketsPage";
 
 function App() {
   const routes = useRoutes([
@@ -30,16 +31,20 @@ function App() {
       element: <Register />,
     },
     {
+      path: "/ticketsPage",
+      element: <TicketsPage />,
+    },
+    {
       path: "/manageusers",
-      element: <ManageUsers/>,
+      element: <ManageUsers />,
     },
     {
       path: "/serviceticket",
-      element: <ServiceTicket/>,
+      element: <ServiceTicket />,
     },
     {
       path: "/managetechnicians",
-      element: <ManageTechnicians/>,
+      element: <ManageTechnicians />,
     },
   ]);
   return routes;

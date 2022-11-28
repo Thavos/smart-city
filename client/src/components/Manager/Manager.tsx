@@ -1,14 +1,23 @@
 import { FC } from "react";
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
+import styles from "./Manager.module.css";
 
 export const Manager: FC = () => {
-    const tickets = [];
-    console.log("fetch na získání všech service ticketů do arraye tickets");
-    //fetch
-    return (
-        <>
-            <Button href="/serviceticket">Service tickets</Button>
-            <Button href="/managetechnicians">Manage technicians</Button>
-        </>
-    );
+  return (
+    <nav className={styles["nav"]}>
+      <a className={styles["nav-link"]} href="/ticketsPage">
+        Tickets
+      </a>
+      <a className={styles["nav-link"]}>My Tickets</a>
+
+      <a className={styles["nav-link"]} href="/serviceticket">
+        Service Tickets
+      </a>
+      <a className={styles["nav-link"]}>My Service Tickets</a>
+
+      <a className={styles["nav-link"]} href="/managetechnicians">
+        Manage Technicians
+      </a>
+    </nav>
+  );
 };

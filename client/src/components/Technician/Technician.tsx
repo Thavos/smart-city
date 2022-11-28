@@ -4,10 +4,15 @@ import styles from "./Technician.module.css";
 
 export const Technician: FC = () => {
   return (
-    <>
-      <p>Technician menu</p>
-      <Ticktes />
-      <p>My service tickets</p>
-    </>
+    <nav className={styles["nav"]}>
+      <a className={styles["nav-link"]} href="/ticketsPage">
+        Tickets
+      </a>
+      <a className={styles["nav-link"]}>My Tickets</a>
+      <a className={styles["nav-link"]} href="/ticketsPage">
+        Service Tickets
+      </a>
+      <a className={styles["nav-link"]}>My Service Tickets</a>
+    </nav>
   );
 };

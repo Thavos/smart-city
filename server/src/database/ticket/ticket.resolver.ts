@@ -21,7 +21,7 @@ export class TicketResolver {
 
     const data = createTicketInput;
 
-    //data.userInput.id = id;
+    data.userId = id;
 
     return this.ticketService.create(data);
   }

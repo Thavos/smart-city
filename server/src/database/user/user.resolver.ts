@@ -79,19 +79,19 @@ export class UserResolver {
   }
 
   @Query('user')
-  @Roles('Admin', 'Manager')
+  @Roles('admin', 'manager')
   findOne(@Args('id') id: string) {
     return this.userService.findOne(id);
   }
 
   @Mutation('updateUser')
-  @Roles('Admin', 'Manager')
+  @Roles('admin', 'manager')
   update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.userService.update(updateUserInput.id, updateUserInput);
   }
 
   @Mutation('removeUser')
-  @Roles('Admin')
+  @Roles('admin')
   remove(@Context('req') req: Request, @Args('id') id: string) {
     if (req.cookies['UserID'] == id) return 'Cant remove your own account';
     else return this.userService.remove(id);

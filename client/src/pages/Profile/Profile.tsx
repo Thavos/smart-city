@@ -75,8 +75,6 @@ export const Profile: FC = () => {
           />
 
           {setC()}
-
-          <Ticktes />
         </>
       )}
       {!user && (

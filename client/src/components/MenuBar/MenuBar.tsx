@@ -27,7 +27,7 @@ export const MenuBar: FC<Props> = ({ name, surn, role }) => {
   return (
     <div className={styles["menu-bar"]}>
       <div className={styles["user"]}>
-        {name} {surn} - {role}
+        {name} {surn} {role && <>-</>} {role}
       </div>
       <nav className={styles["nav"]}>
         <a className={classnames(styles["btn"])} href="/profile">
