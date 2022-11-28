@@ -5,6 +5,7 @@
   height: 16rem;
   padding: 1rem;
   width: 20rem;
+  font-family: sans-serif;
 }
 
 .input-container {
@@ -57,7 +58,6 @@
 
 .placeholder {
   color: #65657b;
-  font-family: sans-serif;
   left: 20px;
   line-height: 14px;
   pointer-events: none;
