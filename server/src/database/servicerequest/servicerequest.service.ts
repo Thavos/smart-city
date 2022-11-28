@@ -18,11 +18,9 @@ export class ServiceRequestService {
   }
 
   async findAll() {
-    const tickets = await this.prisma.serviceRequest.findMany({
+    return await this.prisma.serviceRequest.findMany({
       include: { Technician: true },
     });
-
-    return;
   }
 
   findOne(id: string) {
