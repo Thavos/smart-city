@@ -133,6 +133,8 @@ export class UserService {
       orderBy,
       include: {
         tickets: includeTickets,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         manager: true,
         technician: true,
         comments: true,
