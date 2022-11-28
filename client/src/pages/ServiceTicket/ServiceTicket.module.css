@@ -16,9 +16,14 @@
     margin-left: 0.6rem;
     margin-right: 0.6rem;
   }
-.wrapper {
+  
+  .wrapper {
     width: 100%;
     margin: auto;
+}
+
+.table-wrapper {
+  margin-top: 2rem;
 }
 
 table {
