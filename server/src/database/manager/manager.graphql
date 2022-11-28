@@ -1,6 +1,7 @@
 type Manager {
   id: String!
   userId: String!
+  user: User
 }
 
 input CreateManagerInput {

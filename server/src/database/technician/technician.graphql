@@ -1,6 +1,7 @@
 type Technician {
   id: String!
   userId: String!
+  user: User
 }
 
 input CreateTechnicianInput {
