@@ -14,10 +14,14 @@ import { Admin } from "../Admin";
 
 type UserType = {
   id: string;
-  name: string;
-  surn: string;
-  email: string;
-  authId: number;
+  userId: string;
+  user: {
+    id: string;
+    name: string;
+    surn: string;
+    email: string;
+    authId: number;
+  };
 };
 
 export default function ManageUsersTable() {
@@ -31,20 +35,24 @@ export default function ManageUsersTable() {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        query: `query users {
-          users {
-            id
-            name
-            surn
-            email
-            authId
-          }
-        }`,
+        query: `query technicians {
+                    technicians {
+                        id
+                        user{
+                            id
+                            name
+                            surn
+                            email
+                            authId
+                        }
+                    }
+                }`,
       }),
     })
       .then((r) => r.json())
       .then((data) => {
-        setResult(data.data.users);
+        console.log(data);
+        setResult(data.data.technicians);
       });
   }, []);
 
@@ -76,24 +84,6 @@ export default function ManageUsersTable() {
       });
   }
 
-  async function handleDelete(item: UserType) {
-    await fetch("/api/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        query: `mutation removeUser($removeUserId: String) {
-                  removeUser(id: $removeUserId){
-                    id
-                  }
-                }`,
-        variables: { removeUserId: item.id },
-      }),
-    });
-  }
-
   return (
     <div>
       <div style={{ color: "white" }}>
@@ -103,33 +93,31 @@ export default function ManageUsersTable() {
             <td>Last Name</td>
             <td>E-mail</td>
             <td>Role</td>
-            <td>Action</td>
           </tr>
           {!result && <>Loading</>}
           {result &&
             result.map((item: UserType) => {
-              return (
-                <tr>
-                  <td>{item.name}</td>
-                  <td>{item.surn}</td>
-                  <td>{item.email}</td>
-                  <td>
-                    <NativeSelect
-                      defaultValue={item.authId}
-                      sx={{ color: "white" }}
-                      onChange={(e) => handleSelectChange(e, item)}
-                    >
-                      <option value={0}>Citizen</option>
-                      <option value={1}>Technician</option>
-                      <option value={2}>Manager</option>
-                      <option value={3}>Admin</option>
-                    </NativeSelect>
-                  </td>
-                  <td>
-                    <Button onClick={() => handleDelete(item)}>Delete</Button>
-                  </td>
-                </tr>
-              );
+              if (item.user.authId < 3)
+                return (
+                  <tr>
+                    <td>{item.user.name}</td>
+                    <td>{item.user.surn}</td>
+                    <td>{item.user.email}</td>
+                    <td>{item.user.authId}</td>
+                    <td>
+                      <NativeSelect
+                        defaultValue={item.user.authId}
+                        sx={{ color: "white" }}
+                        onChange={(e) => handleSelectChange(e, item)}
+                      >
+                        <option value={0}>Citizen</option>
+                        <option value={1}>Technician</option>
+                        <option value={2}>Manager</option>
+                      </NativeSelect>
+                    </td>
+                  </tr>
+                );
+              else return <></>;
             })}
         </table>
       </div>
