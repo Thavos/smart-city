@@ -11,8 +11,6 @@ export class ServiceRequestService {
 
   create(createServiceRequestInput: CreateServiceRequestInput) {
     return this.prisma.serviceRequest.create({
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore TODO:
       data: createServiceRequestInput,
     });
   }
