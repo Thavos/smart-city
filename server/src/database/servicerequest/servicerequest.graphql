@@ -10,6 +10,7 @@ type ServiceRequest {
   managerId: String!
   technician: Technician
   technicianId: String!
+  commnets: [String!]
 }
 
 input CreateServiceRequestInput {

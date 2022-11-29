@@ -244,10 +244,10 @@ function NewServiceTicket(
       Accept: "application/json",
     },
     body: JSON.stringify({
-      query: `mutation updateServiceRequest($createServiceRequestInput: CreateServiceRequestInput) {
-                          updateServiceRequest(createServiceRequestInput: $createServiceRequestInput) {
-                              id
-                          }
+      query: `mutation createServiceRequest($createServiceRequestInput: CreateServiceRequestInput) {
+                        createServiceRequest(createServiceRequestInput: $createServiceRequestInput) {
+                          id
+                        }
                       }`,
       variables: {
         createServiceRequestInput: {
