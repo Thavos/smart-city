@@ -197,7 +197,7 @@ export class ServiceRequest {
     price: number;
     createdAt: string;
     managerId: string;
-    Technician?: Nullable<Technician>;
+    technician?: Nullable<Technician>;
     technicianId: string;
 }
 

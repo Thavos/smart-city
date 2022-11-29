@@ -6,8 +6,9 @@ type ServiceRequest {
   expectedFinish: String!
   price: Float!
   createdAt: String!
+  manager: Manager
   managerId: String!
-  Technician: Technician
+  technician: Technician
   technicianId: String!
 }
 

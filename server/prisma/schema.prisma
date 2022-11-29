@@ -42,7 +42,7 @@ model Technician {
   user   User   @relation(fields: [userId], references: [id], onDelete: SetDefault)
   userId String @unique @default("FormerUser")
 
-  ServiceRequest ServiceRequest[]
+  serviceRequest ServiceRequest[]
 }
 
 model Manager {
@@ -50,7 +50,7 @@ model Manager {
   user   User   @relation(fields: [userId], references: [id], onDelete: SetDefault)
   userId String @unique @default("FormerUser")
 
-  ServiceRequest ServiceRequest[]
+  serviceRequest ServiceRequest[]
 }
 
 model Ticket {
@@ -81,10 +81,10 @@ model ServiceRequest {
 
   comments Comment[]
 
-  Technician   Technician? @relation(fields: [technicianId], references: [id], onDelete: SetDefault)
+  technician   Technician? @relation(fields: [technicianId], references: [id], onDelete: SetDefault)
   technicianId String?     @default("FormerTechnician")
 
-  Manager   Manager? @relation(fields: [managerId], references: [id], onDelete: SetDefault)
+  manager   Manager? @relation(fields: [managerId], references: [id], onDelete: SetDefault)
   managerId String?  @default("FormerTechnician")
 }
 
@@ -96,13 +96,13 @@ model Comment {
 
   createAt DateTime @default(now())
 
-  User   User?   @relation(fields: [userId], references: [id], onDelete: SetDefault)
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetDefault)
   userId String? @default("FormerUser")
 
-  Ticket   Ticket? @relation(fields: [ticketId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ticket   Ticket? @relation(fields: [ticketId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   ticketId String?
 
-  ServiceRequest   ServiceRequest? @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  serviceRequest   ServiceRequest? @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   serviceRequestId String?
 }
 
