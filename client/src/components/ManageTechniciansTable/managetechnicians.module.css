@@ -1,0 +1,24 @@
+.wrapper {
+    width: 100%;
+    margin: auto;
+}
+
+table {
+    text-align: center;
+    margin: auto;
+    width: 90%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 15px;
+    color: #fff;
+}
+
+option {
+    margin: 40px;
+    background-color: white;
+    color: black;
+}

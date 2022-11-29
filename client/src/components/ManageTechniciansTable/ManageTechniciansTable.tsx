@@ -11,6 +11,7 @@ import { Citizen } from "../Citizen";
 import { Technician } from "../Technician";
 import { Manager } from "../Manager";
 import { Admin } from "../Admin";
+import styles from "./managetechnicians.module.css"
 
 type UserType = {
   id: string;
@@ -88,14 +89,8 @@ export default function ManageTechniciansTable() {
 
   return (
     <div>
-      <div style={{ color: "white" }}>
+      <div style={{ color: "white" }} className={ styles["wrapper"]}>
         <table>
-          <tr>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>E-mail</td>
-            <td>Role</td>
-          </tr>
           {!result && <>Loading</>}
           {result &&
             result.map((item: UserType) => {
@@ -105,7 +100,6 @@ export default function ManageTechniciansTable() {
                     <td>{item.user.name}</td>
                     <td>{item.user.surn}</td>
                     <td>{item.user.email}</td>
-                    <td>{item.user.authId}</td>
                     <td>
                       <NativeSelect
                         defaultValue={item.user.authId}
@@ -114,7 +108,6 @@ export default function ManageTechniciansTable() {
                       >
                         <option value={0}>Citizen</option>
                         <option value={1}>Technician</option>
-                        <option value={2}>Manager</option>
                       </NativeSelect>
                     </td>
                   </tr>

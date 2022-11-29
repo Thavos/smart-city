@@ -17,8 +17,16 @@ export class ServiceRequestService {
     });
   }
 
-  findAll() {
-    return this.prisma.serviceRequest.findMany();
+  async findMyTickets(id: string) {
+    return await this.prisma.serviceRequest.findMany({
+      where: { technicianId: id },
+    });
+  }
+
+  async findAll() {
+    return await this.prisma.serviceRequest.findMany({
+      include: { Technician: true },
+    });
   }
 
   findOne(id: string) {

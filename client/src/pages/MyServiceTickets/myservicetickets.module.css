@@ -1,0 +1,46 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+
+  margin-top: 0.7rem;
+  margin-left: 0.7rem;
+}
+
+.nav > * {
+  font-size: 1.2rem;
+}
+
+.nav-link {
+  color: white;
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
+}
+
+.flex-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+table {
+  text-align: center;
+  margin: auto;
+  width: 90%;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 15px;
+  color: #fff;
+}
+
+option {
+  margin: 40px;
+  background-color: white;
+  color: black;
+}
+
+form {
+  color: black;
+}

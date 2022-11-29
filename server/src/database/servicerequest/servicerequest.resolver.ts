@@ -7,19 +7,48 @@ import {
   UpdateServiceRequestInput,
 } from 'src/types/graphql';
 import { Roles } from 'src/auth/roles.decorator';
+import { Request } from 'express';
+import { PrismaService } from '../prisma.service';
 
 @Resolver('ServiceRequest')
 @UseGuards(RolesGuard)
 export class ServiceRequestResolver {
-  constructor(private readonly ServiceRequestService: ServiceRequestService) {}
+  constructor(
+    private readonly ServiceRequestService: ServiceRequestService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   @Mutation('createServiceRequest')
   @Roles('Admin', 'Manager')
-  create(
+  async create(
     @Args('createServiceRequestInput')
     createServiceRequestInput: CreateServiceRequestInput,
+    @Context('req') req: Request,
   ) {
+    let manager;
+    if (req.cookies['userID'])
+      manager = await this.prisma.manager.findFirst({
+        where: { userId: req.cookies['userID'] },
+      });
+
+    createServiceRequestInput.managerId = manager.id;
+
     return this.ServiceRequestService.create(createServiceRequestInput);
+  }
+
+  @Query('findMyTickets')
+  @Roles('Technician')
+  async findMyTickets(@Context('req') req: Request) {
+    if (req.cookies['userID']) {
+      const user = await this.prisma.user.findFirst({
+        where: { id: req.cookies['userID'] },
+        include: { technician: true },
+      });
+
+      return this.ServiceRequestService.findMyTickets(user.technician.id);
+    }
+
+    return;
   }
 
   @Query('serviceRequests')

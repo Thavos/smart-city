@@ -1,6 +1,7 @@
 import { FC } from "react";
 import styles from "./Home.module.css";
 import classnames from "classnames";
+import { Ticktes } from "../../components/Ticktes";
 
 export const Home: FC = () => {
   return (
@@ -21,8 +22,9 @@ export const Home: FC = () => {
       </div>
 
       <div className={styles["feed"]}>
-        This city is smart, trust me. Just... just trust me OK?.. Idk anymore...
+        <h1>Tickets feed</h1>
       </div>
+      <Ticktes hideNewTicket={true} />
     </>
   );
 };

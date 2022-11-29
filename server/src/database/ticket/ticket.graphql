@@ -24,6 +24,7 @@ input UpdateTicketInput {
 }
 
 type Query {
+  myTickets: [Ticket]
   tickets: [Ticket]
   ticket(id: String): Ticket
 }

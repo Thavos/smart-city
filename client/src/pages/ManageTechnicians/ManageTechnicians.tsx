@@ -1,11 +1,20 @@
 import { FC, useEffect, useState } from "react";
 import ManageTechniciansTable from "../../components/ManageTechniciansTable/ManageTechniciansTable";
 import { MenuBar } from "../../components/MenuBar";
+import styles from "./ManageTechnicians.module.css";
 
 export const ManageTechnicians: FC = () => {
   return (
     <div>
-      <MenuBar name="" surn="" />
+      <nav className={styles["nav"]}>
+        <a className={styles["nav-link"]} href="/profile">
+          Profile
+        </a>
+        <div>{">"}</div>
+        <a className={styles["nav-link"]} href="/ticketsPage">
+          Tickets
+        </a>
+      </nav>
       <ManageTechniciansTable />
     </div>
   );
