@@ -7,10 +7,10 @@ type ServiceRequest {
   price: Float!
   createdAt: String!
   manager: Manager
-  managerId: String!
+  managerId: String
   technician: Technician
-  technicianId: String!
-  commnets: [String!]
+  technicianId: String
+  commnets: [Comment]
 }
 
 input CreateServiceRequestInput {

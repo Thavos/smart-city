@@ -7,8 +7,8 @@ type User {
   authId: Int!
   technician: Technician
   manager: Manager
-  comments: [Comment!]
-  tickets: [Ticket!]
+  comments: [Comment]
+  tickets: [Ticket]
 }
 
 input CreateUserInput {

@@ -104,9 +104,14 @@ export class LoginUserInput {
 export class Comment {
     id: string;
     desc: string;
+    isService?: Nullable<boolean>;
     createAt: number;
-    userId: string;
+    userId?: Nullable<string>;
     user?: Nullable<User>;
+    ticket?: Nullable<Ticket>;
+    ticktId?: Nullable<string>;
+    serviceRequest?: Nullable<ServiceRequest>;
+    serviceRequestId?: Nullable<string>;
 }
 
 export abstract class IQuery {
@@ -185,6 +190,7 @@ export class Manager {
     id: string;
     userId?: Nullable<string>;
     user?: Nullable<User>;
+    serviceRequest?: Nullable<Nullable<ServiceRequest>[]>;
 }
 
 export class ServiceRequest {
@@ -196,15 +202,17 @@ export class ServiceRequest {
     price: number;
     createdAt: string;
     manager?: Nullable<Manager>;
-    managerId: string;
+    managerId?: Nullable<string>;
     technician?: Nullable<Technician>;
-    technicianId: string;
+    technicianId?: Nullable<string>;
+    commnets?: Nullable<Nullable<Comment>[]>;
 }
 
 export class Technician {
     id: string;
-    userId: string;
+    userId?: Nullable<string>;
     user?: Nullable<User>;
+    serviceRequest?: Nullable<Nullable<ServiceRequest>[]>;
 }
 
 export class Ticket {
@@ -215,6 +223,7 @@ export class Ticket {
     createdAt: string;
     user?: Nullable<User>;
     userId?: Nullable<string>;
+    comments?: Nullable<Comment[]>;
 }
 
 export class User {
@@ -226,8 +235,8 @@ export class User {
     authId: number;
     technician?: Nullable<Technician>;
     manager?: Nullable<Manager>;
-    comments?: Nullable<Comment[]>;
-    tickets?: Nullable<Ticket[]>;
+    comments?: Nullable<Nullable<Comment>[]>;
+    tickets?: Nullable<Nullable<Ticket>[]>;
 }
 
 type Nullable<T> = T | null;

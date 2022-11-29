@@ -1,7 +1,9 @@
 type Technician {
   id: String!
-  userId: String!
+  userId: String
   user: User
+
+  serviceRequest: [ServiceRequest]
 }
 
 input CreateTechnicianInput {

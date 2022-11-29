@@ -1,9 +1,14 @@
 type Comment {
   id: String!
   desc: String!
+  isService: Boolean
   createAt: Int!
-  userId: String!
+  userId: String
   user: User
+  ticket: Ticket
+  ticktId: String
+  serviceRequest: ServiceRequest
+  serviceRequestId: String
 }
 
 input CreateCommentInput {

@@ -6,6 +6,7 @@ type Ticket {
   createdAt: String!
   user: User
   userId: String
+  comments: [Comment!]
 }
 
 input CreateTicketInput {
