@@ -25,18 +25,12 @@ type UserType = {
 };
 
 export const Profile: FC = () => {
-  const [user, setUser] = useState<UserType>({
-    name: "Jozko",
-    surn: "Ferko",
-    authId: 0,
-  });
+  const [user, setUser] = useState<UserType>();
   let C: any;
 
   console.log(user);
   const setC = () => {
-    console.log(user);
     if (user) C = ProfileType[user.authId];
-    console.log(ProfileType[user.authId]);
     return <C />;
   };
 
