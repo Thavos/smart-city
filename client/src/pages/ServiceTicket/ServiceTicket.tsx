@@ -127,7 +127,7 @@ export const ServiceTicket = () => {
           Profile
         </a>
         <div>{">"}</div>
-        <a className={styles["nav-link"]} href="/ticketsPage">
+        <a className={styles["nav-link"]} href="/serviceticket">
           Tickets
         </a>
       </nav>

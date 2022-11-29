@@ -11,8 +11,8 @@ export const ManageTechnicians: FC = () => {
           Profile
         </a>
         <div>{">"}</div>
-        <a className={styles["nav-link"]} href="/ticketsPage">
-          Tickets
+        <a className={styles["nav-link"]} href="/managetechnicians">
+          Technicians
         </a>
       </nav>
       <ManageTechniciansTable />
