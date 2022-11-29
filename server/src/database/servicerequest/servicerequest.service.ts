@@ -24,7 +24,9 @@ export class ServiceRequestService {
   }
 
   async findAll() {
-    return await this.prisma.serviceRequest.findMany();
+    return await this.prisma.serviceRequest.findMany({
+      include: { technician: true },
+    });
   }
 
   findOne(id: string) {
