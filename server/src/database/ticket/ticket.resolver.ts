@@ -26,6 +26,13 @@ export class TicketResolver {
     return this.ticketService.create(data);
   }
 
+  @Query('myTickets')
+  myTickets(@Context('req') req: Request) {
+    if (req.cookies['userID'])
+      return this.ticketService.myTickets(req.cookies['userID']);
+    return;
+  }
+
   @Query('tickets')
   findAll(
     @Args('limit') limit: number | null,

@@ -12,6 +12,10 @@ export class TicketService {
     });
   }
 
+  myTickets(id: string) {
+    return this.prisma.ticket.findMany({ where: { userId: id } });
+  }
+
   findAll(
     limit: number | null,
     name: string | null,

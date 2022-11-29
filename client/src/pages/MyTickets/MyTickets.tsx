@@ -1,15 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import styles from "./Ticktes.module.css";
-import { NewTicket } from "../NewTicket";
-import moment from "moment";
-
-type TicketType = {
-  name: string;
-  desc: string;
-  state: number;
-  createdAt: string;
-  userId: number;
-};
+import styles from "./MyTickets.module.css";
 
 enum status {
   "Waiting" = 0,
@@ -20,12 +10,8 @@ enum status {
 
 const TicketStatus = ["Waiting", "Assigned", "Resolved", "Declined"];
 
-export interface Props {
-  hideNewTicket?: boolean;
-}
-
-export const Ticktes: FC<Props> = ({ hideNewTicket }) => {
-  const [tickets, setTickets] = useState<[TicketType]>();
+export const MyTickets: FC = () => {
+  const [tickets, setTickets] = useState<[any]>();
 
   useEffect(() => {
     fetch("/api/graphql", {
@@ -35,8 +21,8 @@ export const Ticktes: FC<Props> = ({ hideNewTicket }) => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        query: `query ticket {
-          tickets {
+        query: `query myTickets {
+          myTickets {
           name
           desc
           state
@@ -49,22 +35,27 @@ export const Ticktes: FC<Props> = ({ hideNewTicket }) => {
       .then((r) => r.json())
       .then((data) => {
         console.log(data);
-        if (data.data.tickets) setTickets(data.data.tickets);
+        if (data.data.myTickets) setTickets(data.data.myTickets);
       });
   }, [setTickets]);
 
   return (
     <div className={styles["body"]}>
-      {!hideNewTicket && (
-        <div className={styles["new-tickets"]}>
-          <NewTicket />
-        </div>
-      )}
+      <nav className={styles["nav"]}>
+        <a className={styles["nav-link"]} href="/profile">
+          Profile
+        </a>
+        <div>{">"}</div>
+        <a className={styles["nav-link"]} href="/mytickets">
+          My Tickets
+        </a>
+      </nav>
+
       <div className={styles["all-tickets"]}>
         {tickets &&
-          tickets.map((c) => {
+          tickets.map((c, id) => {
             return (
-              <div className={styles["ticket"]}>
+              <div key={"ticket" + id} className={styles["ticket"]}>
                 <header className={styles["ticket-name"]}>{c.name}</header>
                 <div className={styles["ticket-date"]}>
                   {new Intl.DateTimeFormat("cs-CZ", {

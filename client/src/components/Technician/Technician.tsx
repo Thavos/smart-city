@@ -8,7 +8,12 @@ export const Technician: FC = () => {
       <a className={styles["nav-link"]} href="/ticketsPage">
         Tickets
       </a>
-      <a className={styles["nav-link"]} href="/myservicetickets">My Service Tickets</a>
+      <a className={styles["nav-link"]} href="/mytickets">
+        My Tickets
+      </a>
+      <a className={styles["nav-link"]} href="/myservicetickets">
+        My Service Tickets
+      </a>
     </nav>
   );
 };

@@ -9,7 +9,9 @@ export const Citizen: FC = () => {
       <a className={styles["nav-link"]} href="/ticketsPage">
         Tickets
       </a>
-      <a className={styles["nav-link"]}>My Tickets</a>
+      <a className={styles["nav-link"]} href="/mytickets">
+        My Tickets
+      </a>
     </nav>
   );
 };

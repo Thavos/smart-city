@@ -182,7 +182,7 @@ export default function MyServiceTickets() {
           Profile
         </a>
         <div>{">"}</div>
-        <a className={styles["nav-link"]} href="/ticketsPage">
+        <a className={styles["nav-link"]} href="/myservicetickets">
           Tickets
         </a>
       </nav>
@@ -203,11 +203,13 @@ export default function MyServiceTickets() {
                   <td>{c.name}</td>
                   <td>{c.desc}</td>
                   <td>{c.price}</td>
-                  <td>{new Intl.DateTimeFormat("cs-CZ", {
+                  <td>
+                    {new Intl.DateTimeFormat("cs-CZ", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",
-                    }).format(parseInt(c.expectedFinish))}</td>
+                    }).format(parseInt(c.expectedFinish))}
+                  </td>
                   {/* <div>{c.id}</div> */}
                   {/* <div>
                   {" "}

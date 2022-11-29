@@ -129,6 +129,8 @@ export abstract class IQuery {
 
     abstract technician(id?: Nullable<string>): Nullable<Technician> | Promise<Nullable<Technician>>;
 
+    abstract myTickets(): Nullable<Nullable<Ticket>[]> | Promise<Nullable<Nullable<Ticket>[]>>;
+
     abstract tickets(): Nullable<Nullable<Ticket>[]> | Promise<Nullable<Nullable<Ticket>[]>>;
 
     abstract ticket(id?: Nullable<string>): Nullable<Ticket> | Promise<Nullable<Ticket>>;

@@ -1,27 +1,26 @@
 .nav {
-    display: flex;
-    flex-direction: row;
-  
-    margin-top: 0.7rem;
-    margin-left: 0.7rem;
-  }
-  
-  .nav > * {
-    font-size: 1.2rem;
-  }
-  
-  .nav-link {
-    color: white;
-    margin-left: 0.6rem;
-    margin-right: 0.6rem;
-  }
-  
-  .flex-wrapper {
-    display: flex;
-    flex-flow: row wrap;
-  }
+  display: flex;
+  flex-direction: row;
 
-  
+  margin-top: 0.7rem;
+  margin-left: 0.7rem;
+}
+
+.nav > * {
+  font-size: 1.2rem;
+}
+
+.nav-link {
+  color: white;
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
+}
+
+.flex-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 table {
   text-align: center;
   margin: auto;
@@ -43,5 +42,5 @@ option {
 }
 
 form {
-color: black;
+  color: black;
 }

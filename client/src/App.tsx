@@ -12,6 +12,7 @@ import { ServiceTicket } from "./pages/ServiceTicket";
 import { ManageTechnicians } from "./pages/ManageTechnicians";
 import { TicketsPage } from "./pages/TicketsPage";
 import MyServiceTickets from "./pages/MyServiceTickets/MyServiceTickets";
+import { MyTickets } from "./pages/MyTickets";
 
 function App() {
   const routes = useRoutes([
@@ -45,9 +46,9 @@ function App() {
     },
     {
       path: "/myservicetickets",
-      element: <MyServiceTickets/>
-    }
-    ,
+      element: <MyServiceTickets />,
+    },
+    { path: "/mytickets", element: <MyTickets /> },
     {
       path: "/managetechnicians",
       element: <ManageTechnicians />,

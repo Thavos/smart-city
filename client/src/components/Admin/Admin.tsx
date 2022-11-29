@@ -9,6 +9,9 @@ export const Admin: FC = () => {
         <a className={styles["nav-link"]} href="/ticketsPage">
           Tickets
         </a>
+        <a className={styles["nav-link"]} href="/mytickets">
+          My Tickets
+        </a>
         <a className={styles["nav-link"]} href="/serviceticket">
           Service Tickets
         </a>
