@@ -35,7 +35,7 @@ export const Ticktes: FC<Props> = ({ hideNewTicket }) => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        query: `query ticket {
+        query: `query tickets {
           tickets {
           name
           desc
