@@ -10,7 +10,9 @@ export class TechnicianService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createTechnicianInput: CreateTechnicianInput) {
-    return this.prisma.technician.create({// @ts-ignore
+    return this.prisma.technician.create({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore TODO:
       data: createTechnicianInput,
     });
   }

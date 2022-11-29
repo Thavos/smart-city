@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { RolesGuard } from 'src/auth/roles.guard';
-import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
-import { ServiceRequestService } from './ServiceRequest.service';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { ServiceRequestService } from './servicerequest.service';
 import {
   CreateServiceRequestInput,
   UpdateServiceRequestInput,

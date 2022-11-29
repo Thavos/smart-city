@@ -8,6 +8,8 @@ export class TicketService {
 
   create(createTicketInput: CreateTicketInput) {
     return this.prisma.ticket.create({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore TODO:
       data: createTicketInput,
     });
   }
@@ -43,6 +45,8 @@ export class TicketService {
       take: limit || 100,
       where,
       orderBy,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       include: { user: includeUser },
     });
   }

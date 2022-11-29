@@ -19,7 +19,7 @@ datasource db {
 //
 // Technician
 // Manager
-// Admin?
+// Admin
 //
 
 model User {

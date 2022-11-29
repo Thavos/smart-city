@@ -65,6 +65,9 @@ export class UserResolver {
     @Context('req') body: Request,
   ) {
     const includeTickets = body.body.query.indexOf('tickets {') > -1;
+    const includeManager = body.body.query.indexOf('manager {') > -1;
+    const includeTechnician = body.body.query.indexOf('technician {') > -1;
+    const includeComments = body.body.query.indexOf('comments {') > -1;
 
     return this.userService.findAll(
       limit,
@@ -75,23 +78,26 @@ export class UserResolver {
       sort,
       sortDir,
       includeTickets,
+      includeManager,
+      includeTechnician,
+      includeComments,
     );
   }
 
   @Query('user')
-  @Roles('admin', 'manager')
+  @Roles('Admin', 'Manager')
   findOne(@Args('id') id: string) {
     return this.userService.findOne(id);
   }
 
   @Mutation('updateUser')
-  @Roles('admin', 'manager')
+  @Roles('Admin', 'Manager')
   update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.userService.update(updateUserInput.id, updateUserInput);
   }
 
   @Mutation('removeUser')
-  @Roles('admin')
+  @Roles('Admin')
   remove(@Context('req') req: Request, @Args('id') id: string) {
     if (req.cookies['UserID'] == id) return 'Cant remove your own account';
     else return this.userService.remove(id);

@@ -77,6 +77,8 @@ export class UserService {
 
     if (ticket) {
       await this.prisma.ticket.create({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore TODO:
         data: {
           ...ticket,
           userId: user.id,
@@ -101,6 +103,9 @@ export class UserService {
     sort: 'name' | 'surn' | 'email' | 'authId' | null,
     sortDir: 'asc' | 'desc' | null,
     includeTickets: boolean,
+    includeManager: boolean,
+    includeTechnician: boolean,
+    includeComments: boolean,
   ) {
     const where: Record<string, any> = {};
     const orderBy: Record<string, string>[] = [];
@@ -131,9 +136,9 @@ export class UserService {
       orderBy,
       include: {
         tickets: includeTickets,
-        manager: true,
-        technician: true,
-        comments: true,
+        //manager: includeManager,
+        //technician: includeTechnician,
+        //comments: includeComments,
       },
     });
   }
@@ -185,16 +190,8 @@ export class UserService {
   }
 
   async remove(id: string) {
-    console.log(id);
-
     const user = await this.prisma.user.findUnique({
       where: { id: id },
-      include: {
-        manager: true,
-        technician: true,
-        tickets: true,
-        comments: true,
-      },
     });
 
     if (user.email === 'admin@admin.com') {
