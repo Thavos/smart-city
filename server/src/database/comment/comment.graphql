@@ -3,14 +3,13 @@ type Comment {
   desc: String!
   createAt: Int!
   userId: String!
-  ticketId: String!
+  user: User
 }
 
 input CreateCommentInput {
   desc: String!
   createAt: Int!
   userId: String!
-  ticketId: String!
 }
 
 input UpdateCommentInput {
