@@ -147,7 +147,7 @@ export const ServiceTicket = () => {
             servTickets.map((item: any) => {
               if (technicians)
                 technicians.forEach((tech: any) => {
-                  if (tech.user.id === item.Technician.userId)
+                  if (tech.user.id === item.technician.userId)
                     item.email = tech.user.email;
                 });
               return (
