@@ -29,7 +29,7 @@ export default function MyServiceTickets() {
                         state
                         price
                         expectedFinish
-                        Technician{
+                        technician {
                             userId
                         }
                     }

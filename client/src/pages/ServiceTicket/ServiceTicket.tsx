@@ -105,7 +105,7 @@ export const ServiceTicket = () => {
                         state
                         price
                         expectedFinish
-                        Technician{
+                        technician {
                             userId
                         }
                     }

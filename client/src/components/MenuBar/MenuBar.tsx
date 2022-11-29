@@ -33,7 +33,6 @@ export const MenuBar: FC<Props> = ({ name, surn, role }) => {
         <a className={classnames(styles["btn"])} href="/profile">
           Home
         </a>
-        {/*TODO this may result in harming fetch post, need testing*/}
         <a
           className={classnames(styles["btn"], styles["logout"])}
           onClick={logout}

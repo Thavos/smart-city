@@ -17,7 +17,6 @@ export class CreateCommentInput {
     desc: string;
     createAt: number;
     userId: string;
-    ticketId: string;
 }
 
 export class UpdateCommentInput {
@@ -107,7 +106,7 @@ export class Comment {
     desc: string;
     createAt: number;
     userId: string;
-    ticketId: string;
+    user?: Nullable<User>;
 }
 
 export abstract class IQuery {
@@ -196,6 +195,7 @@ export class ServiceRequest {
     expectedFinish: string;
     price: number;
     createdAt: string;
+    manager?: Nullable<Manager>;
     managerId: string;
     technician?: Nullable<Technician>;
     technicianId: string;
