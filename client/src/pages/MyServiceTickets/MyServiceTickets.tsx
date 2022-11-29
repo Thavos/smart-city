@@ -203,7 +203,11 @@ export default function MyServiceTickets() {
                   <td>{c.name}</td>
                   <td>{c.desc}</td>
                   <td>{c.price}</td>
-                  <td>{c.expectedFinish}</td>
+                  <td>{new Intl.DateTimeFormat("cs-CZ", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    }).format(parseInt(c.expectedFinish))}</td>
                   {/* <div>{c.id}</div> */}
                   {/* <div>
                   {" "}
