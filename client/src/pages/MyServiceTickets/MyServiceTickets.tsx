@@ -12,7 +12,7 @@ type ticket = {
 };
 
 export default function MyServiceTickets() {
-  const [myTickets, setMyTickets] = useState<any[]>();
+  const [myTickets, setMyTickets] = useState<ticket[]>();
   useEffect(() => {
     fetch("/api/graphql", {
       method: "POST",
@@ -21,8 +21,8 @@ export default function MyServiceTickets() {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        query: `query serviceRequests {
-                    serviceRequests {
+        query: `query findMyTickets {
+                    findMyTickets {
                         id
                         name
                         desc
@@ -39,7 +39,7 @@ export default function MyServiceTickets() {
       .then((r) => r.json())
       .then((data) => {
         console.log(data);
-        if (data.data.serviceRequests) setMyTickets(data.data.serviceRequests);
+        if (data.data.findMyTickets) setMyTickets(data.data.findMyTickets);
       });
   }, []);
 
@@ -187,12 +187,25 @@ export default function MyServiceTickets() {
         </a>
       </nav>
       <div className={styles["flex-wrapper"]}>
-        {myTickets &&
-          myTickets.map((c) => {
-            return (
-              <div>
-                <div>{c.id}</div>
-                <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Ticket Name</th>
+              <th>Description</th>
+              <th>Est. Price (CZK)</th>
+              <th>Est. End Date</th>
+            </tr>
+          </thead>
+          {myTickets &&
+            myTickets.map((c) => {
+              return (
+                <tr>
+                  <td>{c.name}</td>
+                  <td>{c.desc}</td>
+                  <td>{c.price}</td>
+                  <td>{c.expectedFinish}</td>
+                  {/* <div>{c.id}</div> */}
+                  {/* <div>
                   {" "}
                   <TextField
                     onBlur={() => handlePriceChange(c)}
@@ -211,14 +224,15 @@ export default function MyServiceTickets() {
                     checked={c.status}
                     onChange={() => handleCheckbox(c)}
                   />
-                </div>
-                <div>
+                </div> */}
+                  {/* <div>
                   {" "}
                   <Button onClick={() => handleOpenModal(c)}>Comment</Button>
-                </div>
-              </div>
-            );
-          })}
+                </div> */}
+                </tr>
+              );
+            })}
+        </table>
       </div>
       <Modal
         open={openModal}

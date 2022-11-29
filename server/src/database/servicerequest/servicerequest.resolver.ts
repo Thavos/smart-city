@@ -36,7 +36,7 @@ export class ServiceRequestResolver {
     return this.ServiceRequestService.create(createServiceRequestInput);
   }
 
-  @Query('serviceRequests')
+  @Query('findMyTickets')
   @Roles('Technician')
   async findMyTickets(@Context('req') req: Request) {
     if (req.cookies['userID']) {
