@@ -40,12 +40,11 @@ export class ServiceRequestResolver {
   @Roles('Technician')
   async findMyTickets(@Context('req') req: Request) {
     if (req.cookies['userID']) {
-      const user = await this.prisma.user.findFirst({
-        where: { id: req.cookies['userID'] },
-        include: { technician: true },
+      const technician = await this.prisma.technician.findFirst({
+        where: { userId: req.cookies['userID'] },
       });
 
-      return this.ServiceRequestService.findMyTickets(user.technician.id);
+      return this.ServiceRequestService.findMyTickets(technician.id);
     }
 
     return;
