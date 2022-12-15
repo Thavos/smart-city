@@ -38,9 +38,10 @@ export const Login: FC = () => {
           data.data.login.id !== "WrongPassword" &&
           data.data.login.id !== "UnknownUser"
         ) {
-          navigate("/profile");
+            localStorage.setItem("Id", data.data.login.id);
+            navigate("/profile");
         } else {
-          setData(data.data.login.id);
+            setData(data.data.login.id);
         }
       });
   };

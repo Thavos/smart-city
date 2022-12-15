@@ -1,11 +1,17 @@
 import { MenuBar } from "../../components/MenuBar";
 import { Box, Button, Checkbox, Modal } from "@mui/material";
-import { useEffect, useState } from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import styles from "./ServiceTicket.module.css";
 import { convertToObject } from "typescript";
+import Cookies from "universal-cookie";
 
 export const ServiceTicket = () => {
   const [showModal, setShowModal] = useState(false);
+  const [serviceTicketName, setServiceTicketName] = useState("");
+  const [serviceTicketDesc, setServiceTicketDesc] = useState("");
+  const [serviceTicketPrice, setServiceTicketPrice] = useState("");
+  const [serviceTicketDate, setServiceTicketDate] = useState("");
+  const [serviceTicketTechId, setServiceTicketTechId] = useState("");
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -51,14 +57,37 @@ export const ServiceTicket = () => {
     setShowModal(true);
   }
 
-  function handleNewServiceticket(event: React.ChangeEvent<HTMLFormElement>) {
+  async function handleNewServiceticket(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    NewServiceTicket(
-      event.target.name,
-      event.target.description.value,
-      event.target.technician.value,
-      technicians
-    );
+    fetch("/api/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: `mutation createServiceRequest($createServiceRequestInput: CreateServiceRequestInput) {
+                        createServiceRequest(createServiceRequestInput: $createServiceRequestInput) {
+                          id
+                        }
+                      }`,
+        variables: {
+          createServiceRequestInput: {
+            name: serviceTicketName,
+            desc: serviceTicketDesc,
+            state: 0,
+            expectedFinish: Date.now().toString(),
+            price: 0,
+            managerId: localStorage.getItem("Id"),
+            technicianId: serviceTicketTechId,
+          },
+        },
+      }),
+    })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+        });
   }
 
   function handleCheckbox(ticket: any) {
@@ -176,30 +205,34 @@ export const ServiceTicket = () => {
       </div>
       <Modal open={showModal} onClose={() => setShowModal(false)}>
         <Box sx={style}>
-          <form onSubmit={handleNewServiceticket}>
+          <form onSubmit={(e:FormEvent<HTMLFormElement>) => handleNewServiceticket(e)}>
             <h2>Create new service ticket</h2>
             <input
-              name="name"
-              type="text"
-              className="form-control"
-              placeholder="Name"
-              defaultValue=""
+             id="name"
+             type="text"
+             value={serviceTicketName}
+             onChange={(e:ChangeEvent<HTMLInputElement>) => {
+               setServiceTicketName(e.target.value);
+             }}
+             required
+             />
+            <p/>
+            <textarea
+                id="desc"
+                value={serviceTicketDesc}
+                onChange={(e:ChangeEvent<HTMLTextAreaElement>) => {
+                  setServiceTicketDesc(e.target.value);
+                }}
+                required
             />
             <p />
             <input
-              name="description"
-              type="text"
-              className="form-control"
-              placeholder="Description"
-              defaultValue=""
-            />
-            <p />
-            <input
-              name="price"
-              type="number"
-              className="form-control"
-              placeholder="Price"
-              defaultValue=""
+                name="price"
+                type="number"
+                value={serviceTicketPrice}
+                onChange={(e:ChangeEvent<HTMLInputElement>) => {
+                  setServiceTicketPrice(e.target.value);
+                }}
             />
             <p />
             <input
@@ -208,13 +241,22 @@ export const ServiceTicket = () => {
               className="form-control"
               placeholder="End Date"
               defaultValue=""
+              onChange={(e:ChangeEvent<HTMLInputElement>) => {
+                setServiceTicketDate(e.target.value);
+              }}
             />
             <p />
-            <select id="technician">
+            <select
+                id="technician"
+                onChange={(e:ChangeEvent<HTMLSelectElement>) => {
+                  console.log(e.target.value);
+                  setServiceTicketTechId(e.target.value);
+                }}
+            >
               {technicians &&
                 technicians.map((item: any) => {
                   return (
-                    <option value={item.user.email}>{item.user.email}</option>
+                    <option value={item.user.id}>{item.user.email}</option>
                   );
                 })}
             </select>
@@ -226,44 +268,3 @@ export const ServiceTicket = () => {
     </div>
   );
 };
-
-function NewServiceTicket(
-  name: String,
-  desc: String,
-  tech: String,
-  technicians: any
-) {
-  technicians.forEach((tech: any) => {
-    if (tech.user.email === tech) tech = tech.id;
-  });
-
-  fetch("/api/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      query: `mutation createServiceRequest($createServiceRequestInput: CreateServiceRequestInput) {
-                        createServiceRequest(createServiceRequestInput: $createServiceRequestInput) {
-                          id
-                        }
-                      }`,
-      variables: {
-        createServiceRequestInput: {
-          name: name,
-          desc: desc,
-          state: 0,
-          expectedFinish: "000000000",
-          price: 0,
-          managerId: "null",
-          technicianId: tech,
-        },
-      },
-    }),
-  })
-    .then((r) => r.json())
-    .then((data) => {
-      console.log(data);
-    });
-}
