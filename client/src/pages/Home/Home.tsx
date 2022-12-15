@@ -3,7 +3,7 @@ import styles from "./Home.module.css";
 import classnames from "classnames";
 import { Tickets } from "../../components/Tickets";
 
-export const HomeView: FC = () => {
+export const Home: FC = () => {
   return (
     <>
       <div className={styles["menu-bar"]}>

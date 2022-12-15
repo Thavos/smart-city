@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import styles from "./Ticktes.module.css";
+import styles from "./Tickets.module.css";
 import { NewTicket } from "../NewTicket";
 import moment from "moment";
 
@@ -24,7 +24,7 @@ export interface Props {
   hideNewTicket?: boolean;
 }
 
-export const Ticktes: FC<Props> = ({ hideNewTicket }) => {
+export const Tickets: FC<Props> = ({ hideNewTicket }) => {
   const [tickets, setTickets] = useState<[TicketType]>();
 
   useEffect(() => {
