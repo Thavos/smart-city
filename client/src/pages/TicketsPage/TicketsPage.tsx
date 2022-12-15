@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { NewTicket } from "../../components/NewTicket";
-import { Ticktes } from "../../components/Ticktes";
+import { Tickets } from "../../components/Tickets";
 import styles from "./TicketsPage.module.css";
 
 export const TicketsPage: FC = () => {
@@ -15,7 +15,7 @@ export const TicketsPage: FC = () => {
           Tickets
         </a>
       </nav>
-      <Ticktes />
+      <Tickets />
     </>
   );
 };

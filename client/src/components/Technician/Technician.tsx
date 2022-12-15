@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Ticktes } from "../Ticktes";
+import { Tickets } from "../Tickets";
 import styles from "./Technician.module.css";
 
 export const Technician: FC = () => {

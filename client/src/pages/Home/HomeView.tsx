@@ -1,9 +1,9 @@
 import { FC } from "react";
 import styles from "./Home.module.css";
 import classnames from "classnames";
-import { Ticktes } from "../../components/Ticktes";
+import { Tickets } from "../../components/Tickets";
 
-export const Home: FC = () => {
+export const HomeView: FC = () => {
   return (
     <>
       <div className={styles["menu-bar"]}>
@@ -24,7 +24,7 @@ export const Home: FC = () => {
       <div className={styles["feed"]}>
         <h1>Tickets feed</h1>
       </div>
-      <Ticktes hideNewTicket={true} />
+      <Tickets hideNewTicket={true} />
     </>
   );
 };
