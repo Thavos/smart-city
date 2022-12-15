@@ -53,7 +53,7 @@ export const MyTickets: FC = () => {
 
       <div className={styles["all-tickets"]}>
         {tickets &&
-          tickets.map((c, id) => {
+          tickets.reverse().map((c, id) => {
             return (
               <div key={"ticket" + id} className={styles["ticket"]}>
                 <header className={styles["ticket-name"]}>{c.name}</header>
