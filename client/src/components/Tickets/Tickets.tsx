@@ -48,7 +48,6 @@ export const Tickets: FC<Props> = ({ hideNewTicket }) => {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         if (data.data.tickets) setTickets(data.data.tickets);
       });
   }, [setTickets]);
@@ -62,7 +61,7 @@ export const Tickets: FC<Props> = ({ hideNewTicket }) => {
       )}
       <div className={styles["all-tickets"]}>
         {tickets &&
-          tickets.map((c) => {
+          tickets.slice(0).reverse().map((c) => {
             return (
               <div className={styles["ticket"]}>
                 <header className={styles["ticket-name"]}>{c.name}</header>

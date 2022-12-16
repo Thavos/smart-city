@@ -21,7 +21,7 @@ export const MyTickets: FC = () => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        query: `query myTickets {
+        query: `query myTickets{
           myTickets {
           name
           desc
@@ -34,10 +34,10 @@ export const MyTickets: FC = () => {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         if (data.data.myTickets) setTickets(data.data.myTickets);
       });
   }, [setTickets]);
+
 
   return (
     <div className={styles["body"]}>
@@ -53,7 +53,7 @@ export const MyTickets: FC = () => {
 
       <div className={styles["all-tickets"]}>
         {tickets &&
-          tickets.reverse().map((c, id) => {
+          tickets.map((c, id) => {
             return (
               <div key={"ticket" + id} className={styles["ticket"]}>
                 <header className={styles["ticket-name"]}>{c.name}</header>

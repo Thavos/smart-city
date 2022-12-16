@@ -205,7 +205,7 @@ export class ServiceRequest {
     managerId?: Nullable<string>;
     technician?: Nullable<Technician>;
     technicianId?: Nullable<string>;
-    commnets?: Nullable<Nullable<Comment>[]>;
+    commnets: Comment[];
 }
 
 export class Technician {

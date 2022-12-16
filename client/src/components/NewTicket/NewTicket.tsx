@@ -27,9 +27,7 @@ export const NewTicket: FC = () => {
       }),
     })
       .then((r) => r.json())
-      .then((data) => {
-        console.log(data);
-      });
+      .then(() => window.location.reload());
   };
 
   return (
