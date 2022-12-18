@@ -41,6 +41,7 @@ export class CreateServiceRequestInput {
     price: number;
     managerId: string;
     technicianId: string;
+    connectedTicketId: string;
 }
 
 export class UpdateServiceRequestInput {
@@ -206,6 +207,7 @@ export class ServiceRequest {
     technician?: Nullable<Technician>;
     technicianId?: Nullable<string>;
     commnets: Comment[];
+    connectedTicketId: string;
 }
 
 export class Technician {

@@ -12,6 +12,7 @@ export const ServiceTicket = () => {
   const [serviceTicketPrice, setServiceTicketPrice] = useState("");
   const [serviceTicketDate, setServiceTicketDate] = useState("");
   const [serviceTicketTechId, setServiceTicketTechId] = useState("");
+  const [ticketId, setTicketId] = useState("");
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -25,6 +26,34 @@ export const ServiceTicket = () => {
   };
 
   const [technicians, setTechnicians] = useState<any>();
+  const [tickets, setTickets] = useState<any[]>();
+
+  //Fetch ticketů pro listování
+  useEffect(() => {
+    fetch("/api/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: `query tickets {
+          tickets {
+          name
+          state
+          id
+        }
+      }`,
+      }),
+    })
+        .then((r) => r.json())
+        .then((data) => {
+          const filtered = data.data.tickets.filter((ticket: { state: number; }) => ticket.state === 0);
+          if (filtered) setTickets(filtered);
+        });
+  }, [setTickets]);
+
+  //Fetch techniků
   useEffect(() => {
     fetch("/api/graphql", {
       method: "POST",
@@ -57,8 +86,9 @@ export const ServiceTicket = () => {
     setShowModal(true);
   }
 
-  async function handleNewServiceticket(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    //Fetch na vytvoření novýho service requestu
     fetch("/api/graphql", {
       method: "POST",
       headers: {
@@ -76,7 +106,7 @@ export const ServiceTicket = () => {
             name: serviceTicketName,
             desc: serviceTicketDesc,
             state: 0,
-            expectedFinish: Date.now().toString(),
+            expectedFinish: serviceTicketDate,
             price: 0,
             managerId: localStorage.getItem("Id"),
             technicianId: serviceTicketTechId,
@@ -88,9 +118,40 @@ export const ServiceTicket = () => {
         .then((data) => {
           console.log(data);
         });
+
+    //Fetch na update ticketu že je assigned
+
+    fetch("/api/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: `mutation updateTicket($updateTicketInput: UpdateTicketInput){
+                        updateTicket(updateTicketInput: $updateTicketInput) {
+                          id
+                        }
+                      }`,
+        variables: {
+          updateTicketInput: {
+            id: ticketId,
+            state: 1,
+          },
+        },
+      }),
+    })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+        });
   }
 
   function handleCheckbox(ticket: any) {
+    console.log("ticket: ");
+    console.log(ticket);
+    ticket.state = ticket.state === 2 ? 0:2;
+    //Fetch na změnu stavu service ticketu že je done
     fetch("/api/graphql", {
       method: "POST",
       headers: {
@@ -115,9 +176,39 @@ export const ServiceTicket = () => {
       .then((data) => {
         console.log(data);
       });
+    console.log(ticket);
+
+    //Fetch na změnu stavu ticketu že je done
+    fetch("/api/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: `mutation updateTicket($updateTicketInput: UpdateTicketInput){
+                        updateTicket(updateTicketInput: $updateTicketInput) {
+                          id
+                          state
+                        }
+                      }`,
+        variables: {
+          updateTicketInput: {
+            id: ticketId,
+            state: 2,
+          },
+        },
+      }),
+    })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+        });
   }
 
   const [servTickets, setServTickets] = useState<any[]>();
+  //Fetch na získání všechn service requestů
+  //todo je třeba přidat ticketId do requestu protože je potřeba
   useEffect(() => {
     fetch("/api/graphql", {
       method: "POST",
@@ -137,6 +228,7 @@ export const ServiceTicket = () => {
                         technician {
                             userId
                         }
+                        connectedTicketId
                     }
                 }`,
       }),
@@ -194,7 +286,7 @@ export const ServiceTicket = () => {
                   </td>
                   <td>
                     <Checkbox
-                      checked={item.state}
+                      checked={item.state===2}
                       onChange={() => handleCheckbox(item)}
                     />
                   </td>
@@ -205,7 +297,7 @@ export const ServiceTicket = () => {
       </div>
       <Modal open={showModal} onClose={() => setShowModal(false)}>
         <Box sx={style}>
-          <form onSubmit={(e:FormEvent<HTMLFormElement>) => handleNewServiceticket(e)}>
+          <form onSubmit={(e:FormEvent<HTMLFormElement>) => handleSubmit(e)}>
             <h2>Create new service ticket</h2>
             <input
              id="name"
@@ -261,6 +353,22 @@ export const ServiceTicket = () => {
                 })}
             </select>
             <p />
+            <select
+              id="ticket"
+              onChange={(e:ChangeEvent<HTMLSelectElement>) => {
+                console.log(e.target.value);
+                setTicketId(e.target.value);
+              }}
+            >
+              {tickets &&
+                  tickets.map((item:any)=> {
+                    return (
+                        <option value={item.id}>{item.name}</option>
+                    )
+                  })
+              }
+            </select>
+            <p/>
             <Button type="submit">Create</Button>
           </form>
         </Box>

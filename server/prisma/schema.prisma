@@ -63,8 +63,9 @@ model Ticket {
 
   comments Comment[]
 
-  user   User?   @relation(fields: [userId], references: [id], onDelete: SetDefault)
-  userId String? @default("FormerUser")
+  user           User?            @relation(fields: [userId], references: [id], onDelete: SetDefault)
+  userId         String?          @default("FormerUser")
+  ServiceRequest ServiceRequest[]
 }
 
 model ServiceRequest {
@@ -74,7 +75,7 @@ model ServiceRequest {
 
   state Int // 0 - open | 1 - in progress | 2 - closed | 3 - problem
 
-  expectedFinish DateTime
+  expectedFinish String
   price          Float
 
   createAt DateTime @default(now())
@@ -86,6 +87,9 @@ model ServiceRequest {
 
   manager   Manager? @relation(fields: [managerId], references: [id], onDelete: SetDefault)
   managerId String?  @default("FormerTechnician")
+
+  connectedTicket   Ticket @relation(fields: [connectedTicketId], references: [id], onDelete: SetDefault)
+  connectedTicketId String @default("null")
 }
 
 model Comment {
