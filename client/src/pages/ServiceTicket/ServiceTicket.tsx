@@ -116,7 +116,6 @@ export const ServiceTicket = () => {
     })
         .then((r) => r.json())
         .then((data) => {
-          console.log(data);
         });
 
     //Fetch na update ticketu že je assigned
@@ -174,7 +173,6 @@ export const ServiceTicket = () => {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
       });
     console.log(ticket);
 
@@ -235,7 +233,6 @@ export const ServiceTicket = () => {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         if (data.data.serviceRequests)
           setServTickets(data.data.serviceRequests);
       });

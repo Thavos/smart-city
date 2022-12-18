@@ -27,7 +27,6 @@ export const Profile: FC = () => {
   const [user, setUser] = useState<UserType>();
   let C: any;
 
-  console.log(user);
   const setC = () => {
     if (user) C = ProfileType[user.authId];
     return <C />;
@@ -56,7 +55,6 @@ export const Profile: FC = () => {
       });
   }, []);
 
-  console.log(user);
   return (
     <>
       {user && (
