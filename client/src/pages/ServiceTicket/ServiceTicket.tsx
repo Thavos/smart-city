@@ -86,7 +86,6 @@ export const ServiceTicket = () => {
     })
         .then((r) => r.json())
         .then((data) => {
-          console.log(data);
         });
   }
 
@@ -113,7 +112,6 @@ export const ServiceTicket = () => {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
       });
   }
 
@@ -143,7 +141,6 @@ export const ServiceTicket = () => {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         if (data.data.serviceRequests)
           setServTickets(data.data.serviceRequests);
       });
